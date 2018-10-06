@@ -1,8 +1,13 @@
 @import 'variables';
+@import 'reset';
+@import 'fonts';
 
 body {
     display: flex;
     margin: 0;
+    font-family: 'Maison Neue', sans-serif;
+    font-size: $font-size-s;
+    color: $color-text;
 
     #carousel, #app {
         display: flex;
@@ -10,4 +15,5 @@ body {
     }
 }
 
+@import '../components/Sidebar';
 @import '../components/Editor';
