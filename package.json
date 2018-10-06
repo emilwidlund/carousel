@@ -31,10 +31,12 @@
     "mobx-react": "^5.2.8",
     "monaco-editor": "^0.14.3",
     "node-sass": "^4.9.3",
+    "node-zip": "^1.1.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "sass-loader": "^7.1.0",
-    "style-loader": "^0.23.0"
+    "style-loader": "^0.23.0",
+    "walk": "^2.3.14"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.1",

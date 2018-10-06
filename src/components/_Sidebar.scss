@@ -3,6 +3,7 @@ $sidebar-padding-horizontal: 20px;
 #sidebar {
     width: 300px;
     background-color: $color-bg-sidebar;
+    border-right: 1px solid $color-divider;
     user-select: none;
 
     .sidebar-header {

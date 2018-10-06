@@ -4,6 +4,7 @@ import {Provider} from 'mobx-react';
 
 import * as stores from './stores';
 import Sidebar from './components/Sidebar';
+import Welcome from './components/Welcome';
 import Editor from './components/Editor';
 
 import './scss/main.scss';
@@ -14,25 +15,35 @@ class App extends React.Component {
         console.log(value);
     }
 
+    renderContent() {
+        return (
+            <div id="app">
+                <Sidebar />
+                <Editor 
+                    onValueChange={this.handleEditorValueChange}
+                    options={{
+                        theme: 'vs-dark',
+                        selectOnLineNumbers: true,
+                        scrollBeyondLastLine: false,
+                        minimap: {
+                            enabled: false
+                        },
+                        automaticLayout: true,
+                        fixedOverflowWidgets: true
+                    }}
+                />
+            </div>
+        );
+    }
+
     render() {
         return (
             <Provider {...stores}>
-                <div id="app">
-                    <Sidebar />
-                    <Editor 
-                        onValueChange={this.handleEditorValueChange}
-                        options={{
-                            theme: 'vs-dark',
-                            selectOnLineNumbers: true,
-                            scrollBeyondLastLine: false,
-                            minimap: {
-                                enabled: false
-                            },
-                            automaticLayout: true,
-                            fixedOverflowWidgets: true
-                        }}
-                    />
-                </div>
+                {
+                    stores.ProjectStore.projectInitialized ? 
+                    this.renderContent() : 
+                    <Welcome />
+                }
             </Provider>
         );
     }
