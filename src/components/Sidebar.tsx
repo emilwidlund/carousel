@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as classnames from 'classnames';
+import {inject, observer} from 'mobx-react';
 
 import Icon from './Icon';
 
@@ -33,7 +34,10 @@ class ProjectFileItem extends React.Component<IProjectFileItemProps> {
     }
 }
 
+@inject('ProjectStore')
+@observer
 export default class Sidebar extends React.Component {
+
     render() {
         return (
             <div id="sidebar">
@@ -46,12 +50,14 @@ export default class Sidebar extends React.Component {
                         <ProjectFileItem fileName="Main" type={ProjectFileItemType.Main} />
                     </div>
                     <div className="view">
+                        <h4>Views</h4>
                         <ProjectFileItem fileName="Home" type={ProjectFileItemType.View} />
                         <ProjectFileItem fileName="Customize" type={ProjectFileItemType.View} />
                         <ProjectFileItem fileName="Deploy" type={ProjectFileItemType.View} />
                         <ProjectFileItem fileName="Pause" type={ProjectFileItemType.View} />
                     </div>
                     <div className="generic">
+                        <h4>Generic</h4>
                         <ProjectFileItem fileName="Game Server Data" type={ProjectFileItemType.Generic} />
                         <ProjectFileItem fileName="Recommendation Data" type={ProjectFileItemType.Generic} />
                     </div>

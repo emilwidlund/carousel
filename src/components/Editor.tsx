@@ -9,8 +9,8 @@ export default class Editor extends React.Component<IEditorProps, {}> {
     _editor: monaco.editor.IEditor;
     
     componentDidMount() {
-        const {path, value, language, options} = this.props;
-        const model = monaco.editor.createModel(value, language, path);
+        const {uri, value, language, options} = this.props;
+        const model = monaco.editor.createModel(value, language, uri);
 
         this._editor = monaco.editor.create(this._node, options);
         this._editor.setModel(model);

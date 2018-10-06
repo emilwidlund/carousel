@@ -27,6 +27,8 @@
     "css-loader": "^1.0.0",
     "electron": "^3.0.2",
     "gsap": "^2.0.2",
+    "mobx": "^5.5.0",
+    "mobx-react": "^5.2.8",
     "monaco-editor": "^0.14.3",
     "node-sass": "^4.9.3",
     "react": "^16.5.2",

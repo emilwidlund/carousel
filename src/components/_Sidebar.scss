@@ -15,8 +15,12 @@ $sidebar-padding-horizontal: 20px;
         display: flex;
         flex-direction: column;
 
-        .main, .view, .generic {
-            padding: 10px 0;
+        .view, .generic {
+            padding: 5px 0;
+
+            h4 {
+                padding: 0 $sidebar-padding-horizontal;
+            }
         }
 
         .project-file-item {
