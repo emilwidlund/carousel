@@ -1,46 +1,35 @@
 import * as React from 'react';
-import MonacoEditor from 'react-monaco-editor';
+import * as monaco from 'monaco-editor';
 
-export default class Editor extends React.Component {
+import {IEditorProps} from '../types';
 
-    state = {
-        code: ''
-    }
+export default class Editor extends React.Component<IEditorProps, {}> {
+
+    _node: HTMLElement;
+    _editor: monaco.editor.IEditor;
     
-    editorDidMount(editor: any, monaco: any) {
-        editor.getModel().getOptions().insertSpaces = false;        
+    componentDidMount() {
+        const {path, value, language, options} = this.props;
+        const model = monaco.editor.createModel(value, language, path);
 
-        editor.focus();
+        this._editor = monaco.editor.create(this._node, options);
+        this._editor.setModel(model);
 
-        // Set Save Binding
-        const saveBinding = editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, () => {
-            console.log('Save Macro!');
+        model.onDidChangeContent(() => {
+            const value = model.getValue();
+            this.props.onValueChange(value);
         });
     }
 
-    onChange(code: string) {
-        this.setState({
-            code: code
-        });
+    componentWillUnmount() {
+        this._editor && this._editor.dispose();
     }
 
     render() {
         return (
-            <MonacoEditor
-                language="coffeescript"
-                theme="vs-dark"
-                value={this.state.code}
-                options={{
-                    selectOnLineNumbers: true,
-                    scrollBeyondLastLine: false,
-                    minimap: {
-                        enabled: false
-                    },
-                    automaticLayout: true,
-                    fixedOverflowWidgets: true
-                }}
-                onChange={this.onChange.bind(this)}
-                editorDidMount={this.editorDidMount.bind(this)}
+            <div 
+                id="editor"
+                ref={c => this._node = c} 
             />
         );
     }

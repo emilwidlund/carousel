@@ -13,7 +13,7 @@ app.on('ready', () => {
         height: 800
     });
 
-    mainWindow.loadURL(`file://${__dirname}/dist/index.html`);
+    mainWindow.loadFile(`./dist/index.html`);
 
     mainWindow.openDevTools();
 

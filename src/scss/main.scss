@@ -1,0 +1,13 @@
+@import 'variables';
+
+body {
+    display: flex;
+    margin: 0;
+
+    #carousel, #app {
+        display: flex;
+        flex-grow: 1;
+    }
+}
+
+@import '../components/Editor';
