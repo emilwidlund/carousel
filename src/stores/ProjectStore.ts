@@ -26,11 +26,11 @@ export class ProjectStore {
     }
 
     createProject(filename: string) {
-        const walker = walk.walk('E:/Projects/carousel/dist/templates/project');
+        const walker = walk.walk('E:/Projects/carousel/src/templates/project');
 
         walker.on('file', (root: string, fileStats: any, next: any) => {
             console.log(root);
-            zip.file(`${root.substring(root.length, root.lastIndexOf('\\'))}/${fileStats.name}`, fs.readFileSync(`${root}/${fileStats.name}`));
+            zip.file(`${fileStats.name}`, fs.readFileSync(`${root}/${fileStats.name}`));
             next();
         });
 
