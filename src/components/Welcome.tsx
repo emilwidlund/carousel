@@ -15,7 +15,6 @@ export default class Welcome extends React.Component<any> {
     }
 
     render() {
-        console.log(remote);
         return (
             <div id="welcome">
                 <h1>Welcome to Carousel</h1>

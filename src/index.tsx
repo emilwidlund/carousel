@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import {Provider} from 'mobx-react';
+import {Provider, observer} from 'mobx-react';
 
 import * as stores from './stores';
 import Sidebar from './components/Sidebar';
@@ -9,6 +9,7 @@ import Editor from './components/Editor';
 
 import './scss/main.scss';
 
+@observer
 class App extends React.Component {
 
     handleEditorValueChange(value: string) {
