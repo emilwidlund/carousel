@@ -1,4 +1,5 @@
 import {observable} from 'mobx';
+import * as monaco from 'monaco-editor';
 
 import {remote} from 'electron';
 const fs = remote.require('fs');
@@ -7,13 +8,8 @@ const path = remote.require('path');
 const zip = remote.require('node-zip')();
 const unzip = remote.require('unzip');
 const temp = remote.require('temp').track();
-const rimraf = remote.require('rimraf');
 
-export interface ProjectFilesProperties {
-    main: string;
-    views: string[];
-    generic: string[];
-}
+import EditorStore from './EditorStore';
 
 export class ProjectStore {
 
@@ -21,7 +17,7 @@ export class ProjectStore {
     @observable projectPath: string = null;
     @observable projectTempPath: string = null;
     @observable projectName: string = null;
-    @observable projectFiles: ProjectFilesProperties = {
+    @observable projectFiles: any = {
         main: null,
         views: [],
         generic: []
@@ -82,6 +78,10 @@ export class ProjectStore {
                             }
 
                         });
+
+                        this.buildModels();
+
+                        EditorStore.selectedFile = this.projectFiles.main;
                     });
                 });
         });
@@ -103,6 +103,25 @@ export class ProjectStore {
 
         walker.on('end', () => {
             cb(files);
+        });
+    }
+
+    buildModels() {
+        Object.keys(this.projectFiles).map((k: string, i: number) => {
+
+            if (!Array.isArray(this.projectFiles[k])) {
+                if (this.projectFiles[k].name.endsWith('.js')) {
+                    const model = monaco.editor.createModel(fs.readFileSync(this.projectFiles[k].path, 'utf8'), 'javascript');
+                    this.projectFiles[k].model = model;
+                }
+            } else {
+                this.projectFiles[k].map((file: any, i: number) => {
+                    if (file.name.endsWith('.js')) {
+                        const model = monaco.editor.createModel(fs.readFileSync(file.path, 'utf8'), 'javascript');
+                        this.projectFiles[k][i].model = model;
+                    }
+                });
+            }
         });
     }
 }

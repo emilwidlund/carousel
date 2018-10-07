@@ -1,6 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {Provider, observer} from 'mobx-react';
+import * as monaco from 'monaco-editor';
 
 import * as stores from './stores';
 import Sidebar from './components/Sidebar';
@@ -10,6 +11,10 @@ import Editor from './components/Editor';
 import {remote} from 'electron';
 
 import './scss/main.scss';
+
+
+const framerTheme = require('./misc/framer-theme.json');
+monaco.editor.defineTheme('syntax', framerTheme);
 
 @observer
 class App extends React.Component {
@@ -34,7 +39,7 @@ class App extends React.Component {
                 <Editor 
                     onValueChange={this.handleEditorValueChange}
                     options={{
-                        theme: 'vs-dark',
+                        theme: 'syntax',
                         selectOnLineNumbers: true,
                         scrollBeyondLastLine: false,
                         minimap: {

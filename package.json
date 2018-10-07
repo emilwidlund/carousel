@@ -30,6 +30,7 @@
     "mobx": "^5.5.0",
     "mobx-react": "^5.2.8",
     "monaco-editor": "^0.14.3",
+    "monaco-editor-webpack-plugin": "^1.5.4",
     "node-sass": "^4.9.3",
     "node-zip": "^1.1.1",
     "react": "^16.5.2",

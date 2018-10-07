@@ -3,6 +3,7 @@ import * as monaco from 'monaco-editor';
 // ----- EDITOR
 
 export interface IEditorProps {
+    EditorStore?: any;
     value?: string;
     language?: string;
     uri?: monaco.Uri;

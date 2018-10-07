@@ -1,24 +1,27 @@
 import * as React from 'react';
 import * as monaco from 'monaco-editor';
+import {reaction} from 'mobx';
+import {inject, observer} from 'mobx-react';
 
 import {IEditorProps} from '../types';
 
+@inject('EditorStore')
+@observer
 export default class Editor extends React.Component<IEditorProps, {}> {
 
     _node: HTMLElement;
     _editor: monaco.editor.IEditor;
     
     componentDidMount() {
-        const {uri, value, language, options} = this.props;
-        const model = monaco.editor.createModel(value, language, uri);
-
+        const {options} = this.props;
         this._editor = monaco.editor.create(this._node, options);
-        this._editor.setModel(model);
 
-        model.onDidChangeContent(() => {
-            const value = model.getValue();
-            this.props.onValueChange(value);
-        });
+        reaction(
+            () => this.props.EditorStore.selectedFile,
+            (file) => {
+                this._editor.setModel(file.model);
+            }
+        );
     }
 
     componentWillUnmount() {

@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 module.exports = {
     entry: {
@@ -10,7 +11,7 @@ module.exports = {
     },
     mode: 'development',
     devtool: 'source-map',
-    target: 'electron-main',
+    target: 'electron-renderer',
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json']
     },
@@ -44,5 +45,5 @@ module.exports = {
             }
         ]
     },
-    plugins: [new webpack.HotModuleReplacementPlugin]
+    plugins: [new webpack.HotModuleReplacementPlugin, new MonacoWebpackPlugin()]
 }
