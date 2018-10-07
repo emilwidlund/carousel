@@ -24,11 +24,11 @@ class ProjectFileItem extends React.Component<IProjectFileItemProps> {
             case ProjectFileType.View:
                 iconName = 'panorama_horizontal';
                 break;
-            case ProjectFileType.Generic:
-                iconName = 'bookmark';
+            case ProjectFileType.Component:
+                iconName = 'bubble_chart';
                 break;
             default:
-                iconName = "bookmark";
+                iconName = 'bookmark';
         }
 
         return (
@@ -39,7 +39,7 @@ class ProjectFileItem extends React.Component<IProjectFileItemProps> {
                 ])}
                 onClick={this.handleClick.bind(this)}
             >
-                <Icon name={iconName} />
+                <Icon name={iconName} size={24} />
                 <span>
                     {
                         this.props.file.type === ProjectFileType.Generic ? 
@@ -69,9 +69,21 @@ export default class Sidebar extends React.Component<ISidebarProps> {
                             selected={this.props.ProjectStore.mainFile === this.props.EditorStore.selectedFile}
                         />
                     </div>
-                    <div className="view">
+                    <div className="views">
                         <h4>Views</h4>
                         {this.props.ProjectStore.viewFiles.map((file: IProjectFile, index: number) => {
+                            return (
+                                <ProjectFileItem 
+                                    key={index} 
+                                    file={file} 
+                                    selected={file === this.props.EditorStore.selectedFile}
+                                />
+                            );
+                        })}
+                    </div>
+                    <div className="components">
+                        <h4>Components</h4>
+                        {this.props.ProjectStore.componentFiles.map((file: IProjectFile, index: number) => {
                             return (
                                 <ProjectFileItem 
                                     key={index} 
