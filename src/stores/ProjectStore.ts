@@ -30,7 +30,7 @@ export class ProjectStore {
     createProject(projectPath: string) {
         const walker = walk.walk(path.resolve(__dirname, '/carousel/src/templates/project'));
 
-        walker.on('file', (root: string, fileStats: any, next: any) => {
+        walker.on('file', (root: string, fileStats: any, next: Function) => {
             let folder = root.substring(root.lastIndexOf('\\') + 1, root.length);
             const filename = fileStats.name;
 
@@ -53,22 +53,56 @@ export class ProjectStore {
             fs.writeFile(projectPath, data, 'binary', (err: Error) => {
                 if (err) console.error(err);
 
-                this.projectPath = projectPath;
-                this.projectName = projectPath.substring(projectPath.lastIndexOf('\\') + 1, projectPath.lastIndexOf('.zip'));
-
-                this.initializeProject(this.projectPath, this.projectName);
+                this.initializeProject(projectPath);
             });
         });
     }
 
-    initializeProject(projectPath: string, projectName: string) {
-        temp.mkdir({prefix: `carousel-${projectName}`}, (err: Error, dirPath: string) => {
+    initializeProject(projectPath: string) {
+        
+        this.projectPath = projectPath;
+        this.projectName = projectPath.substring(projectPath.lastIndexOf('\\') + 1, projectPath.lastIndexOf('.crsl'));
+
+        temp.mkdir({prefix: `carousel-${this.projectName}`}, (err: Error, dirPath: string) => {
             fs.createReadStream(projectPath)
                 .pipe(unzip.Extract({path: dirPath}))
                 .on('close', () => {
                     this.projectTempPath = dirPath;
                     this.projectInitialized = true;
+
+                    this.traverseProjectFiles((files: object[]) => {
+                        files.map((file: any, index: number) => {
+
+                            if (file.name.includes('Main.js')) {
+                                this.projectFiles.main = file;
+                            } else if (file.name.includes('.view.js')) {
+                                this.projectFiles.views.push(file);
+                            } else {
+                                this.projectFiles.generic.push(file);
+                            }
+
+                        });
+                    });
                 });
+        });
+    }
+
+    traverseProjectFiles(cb?: Function) {
+        const walker = walk.walk(this.projectTempPath);
+
+        const files: object[] = [];
+
+        walker.on('file', (root: string, fileStats: any, next: Function) => {
+            files.push({
+                path: `${root}/${fileStats.name}`,
+                name: fileStats.name
+            });
+
+            next();
+        });
+
+        walker.on('end', () => {
+            cb(files);
         });
     }
 }

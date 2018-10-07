@@ -36,7 +36,7 @@ class ProjectFileItem extends React.Component<IProjectFileItemProps> {
 
 @inject('ProjectStore')
 @observer
-export default class Sidebar extends React.Component {
+export default class Sidebar extends React.Component<any> {
 
     render() {
         return (
@@ -51,15 +51,16 @@ export default class Sidebar extends React.Component {
                     </div>
                     <div className="view">
                         <h4>Views</h4>
-                        <ProjectFileItem fileName="Home" type={ProjectFileItemType.View} />
-                        <ProjectFileItem fileName="Customize" type={ProjectFileItemType.View} />
-                        <ProjectFileItem fileName="Deploy" type={ProjectFileItemType.View} />
-                        <ProjectFileItem fileName="Pause" type={ProjectFileItemType.View} />
+                        {this.props.ProjectStore.projectFiles.views.map((file: any, index: number) => {
+                            const name = file.name.substring(0, file.name.indexOf('.'));
+                            return <ProjectFileItem fileName={name} type={ProjectFileItemType.View} />;
+                        })}
                     </div>
                     <div className="generic">
                         <h4>Generic</h4>
-                        <ProjectFileItem fileName="Game Server Data" type={ProjectFileItemType.Generic} />
-                        <ProjectFileItem fileName="Recommendation Data" type={ProjectFileItemType.Generic} />
+                        {this.props.ProjectStore.projectFiles.generic.map((file: any, index: number) => {
+                            return <ProjectFileItem fileName={file.name} type={ProjectFileItemType.Generic} />;
+                        })}
                     </div>
                 </div>
             </div>

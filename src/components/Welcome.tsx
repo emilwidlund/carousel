@@ -9,8 +9,23 @@ import Icon from './Icon';
 @observer
 export default class Welcome extends React.Component<any> {
     handleNewProject() {
-        dialog.showSaveDialog({defaultPath: 'project.zip'}, (filename: string) => {
+        dialog.showSaveDialog({defaultPath: 'Untitled.crsl'}, (filename: string) => {
+            if (!filename) return;
             this.props.ProjectStore.createProject(filename);
+        });
+    }
+
+    handleOpenProject() {
+        dialog.showOpenDialog({
+            filters: [
+                {
+                    name: 'Carousel', 
+                    extensions: ['crsl']
+                }
+            ]
+        }, (filepaths: string[]) => {
+            if (!filepaths) return;
+            this.props.ProjectStore.initializeProject(filepaths[0]);
         });
     }
 
@@ -30,7 +45,10 @@ export default class Welcome extends React.Component<any> {
                         />
                         <h3>New Project</h3>
                     </div>
-                    <div className="action open-project">
+                    <div 
+                        className="action open-project"
+                        onClick={this.handleOpenProject.bind(this)}
+                    >
                         <Icon 
                             name="folder" 
                             size={48}
