@@ -42,7 +42,7 @@ export default class Sidebar extends React.Component<any> {
         return (
             <div id="sidebar">
                 <div className="sidebar-header">
-                    <h3>Example Project</h3>
+                    <h3>{this.props.ProjectStore.projectName}</h3>
                     <p>This is an example project</p>
                 </div>
                 <div className="sidebar-navigator">
@@ -53,13 +53,13 @@ export default class Sidebar extends React.Component<any> {
                         <h4>Views</h4>
                         {this.props.ProjectStore.projectFiles.views.map((file: any, index: number) => {
                             const name = file.name.substring(0, file.name.indexOf('.'));
-                            return <ProjectFileItem fileName={name} type={ProjectFileItemType.View} />;
+                            return <ProjectFileItem key={index} fileName={name} type={ProjectFileItemType.View} />;
                         })}
                     </div>
                     <div className="generic">
                         <h4>Generic</h4>
                         {this.props.ProjectStore.projectFiles.generic.map((file: any, index: number) => {
-                            return <ProjectFileItem fileName={file.name} type={ProjectFileItemType.Generic} />;
+                            return <ProjectFileItem key={index} fileName={file.name} type={ProjectFileItemType.Generic} />;
                         })}
                     </div>
                 </div>

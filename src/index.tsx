@@ -7,10 +7,21 @@ import Sidebar from './components/Sidebar';
 import Welcome from './components/Welcome';
 import Editor from './components/Editor';
 
+import {remote} from 'electron';
+
 import './scss/main.scss';
 
 @observer
 class App extends React.Component {
+
+    componentDidMount() {
+        if (remote.process.argv.length >= 2) {
+            const filePath = remote.process.argv[1];
+            if (filePath) {
+                // stores.ProjectStore.initializeProject(filePath);
+            }
+        }
+    }
 
     handleEditorValueChange(value: string) {
         console.log(value);

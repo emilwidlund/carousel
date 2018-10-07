@@ -8,6 +8,7 @@ import Icon from './Icon';
 @inject('ProjectStore')
 @observer
 export default class Welcome extends React.Component<any> {
+    
     handleNewProject() {
         dialog.showSaveDialog({defaultPath: 'Untitled.crsl'}, (filename: string) => {
             if (!filename) return;
