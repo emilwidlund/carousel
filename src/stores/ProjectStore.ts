@@ -24,9 +24,10 @@ export class ProjectStore {
     }
 
     createProject(projectPath: string) {
-        const walker = walk.walk(path.resolve(__dirname, '/carousel/src/templates/project'));
+        const walker = walk.walk(path.resolve('./src/templates/project'));
 
         walker.on('file', (root: string, fileStats: any, next: Function) => {
+
             let folder = root.substring(root.lastIndexOf('\\') + 1, root.length);
             const filename = fileStats.name;
 
