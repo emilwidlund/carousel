@@ -58,21 +58,21 @@
 
     "editor.inactiveSelectionBackground": "#333",
 
-    "editor.lineHighlightBackground": "#333",
-    "editor.lineHighlightBorder": "#333",
+    "editor.lineHighlightBackground": "#111",
+    "editor.lineHighlightBorder": "#111",
     "editor.rangeHighlightBackground": "#222",
 
-    "editor.selectionBackground": "#333",
+    "editor.selectionBackground": "#111",
 
-    "editor.selectionHighlightBackground": "#333",
+    "editor.selectionHighlightBackground": "#111",
 
-    "editor.wordHighlightStrongBackground": "#333",
+    "editor.wordHighlightStrongBackground": "#111",
 
-    "editor.wordHighlightBackground": "#333",
+    "editor.wordHighlightBackground": "#111",
     "editorBracketMatch.background": "#333",
     "editorBracketMatch.border": "#333",
     "editorCodeLens.foreground": "#333",
-    "editorCursor.background": "#444",
+    "editorCursor.background": "#111",
     "editorCursor.foreground": "#fff",
     "editorError.border": "#2D2D2D",
     "editorError.foreground": "#e27e8d",

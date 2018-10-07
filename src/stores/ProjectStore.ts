@@ -11,17 +11,15 @@ const temp = remote.require('temp').track();
 
 import EditorStore from './EditorStore';
 
+import {IProjectFile, ProjectFileType} from '../types';
+
 export class ProjectStore {
 
     @observable projectInitialized = false;
     @observable projectPath: string = null;
     @observable projectTempPath: string = null;
     @observable projectName: string = null;
-    @observable projectFiles: any = {
-        main: null,
-        views: [],
-        generic: []
-    }
+    @observable projectFiles: IProjectFile[] = [];
 
     createProject(projectPath: string) {
         const walker = walk.walk(path.resolve('./src/templates/project'));
@@ -56,7 +54,6 @@ export class ProjectStore {
     }
 
     initializeProject(projectPath: string) {
-        
         this.projectPath = projectPath;
         this.projectName = projectPath.substring(projectPath.lastIndexOf('\\') + 1, projectPath.lastIndexOf('.crsl'));
 
@@ -64,40 +61,51 @@ export class ProjectStore {
             fs.createReadStream(projectPath)
                 .pipe(unzip.Extract({path: dirPath}))
                 .on('close', () => {
-                    this.projectTempPath = dirPath;
-                    this.projectInitialized = true;
 
-                    this.traverseProjectFiles((files: object[]) => {
+                    this.traverseFiles(dirPath, (files: IProjectFile[]) => {
                         files.map((file: any, index: number) => {
 
                             if (file.name.includes('Main.js')) {
-                                this.projectFiles.main = file;
+                                file.type = ProjectFileType.Main;
                             } else if (file.name.includes('.view.js')) {
-                                this.projectFiles.views.push(file);
-                            } else {
-                                this.projectFiles.generic.push(file);
+                                file.type = ProjectFileType.View;
+                            } else if (file.name.includes('.component.js')) {
+                                file.type = ProjectFileType.Component;
                             }
 
                         });
 
-                        this.buildModels();
 
-                        EditorStore.selectedFile = this.projectFiles.main;
+                        this.buildModels(files);
+
+                        this.projectFiles = files;
+                        this.projectTempPath = dirPath;
+
+                        this.projectInitialized = true;
+                        
+                        EditorStore.selectedFile = this.mainFile;
                     });
                 });
         });
     }
 
-    traverseProjectFiles(cb?: Function) {
-        const walker = walk.walk(this.projectTempPath);
+    traverseFiles(path: string, cb?: Function) {
+        const walker = walk.walk(path);
 
-        const files: object[] = [];
+        const files: IProjectFile[] = [];
 
         walker.on('file', (root: string, fileStats: any, next: Function) => {
-            files.push({
+
+            const projectFile: IProjectFile = {
+                name: fileStats.name,
+                shortName: fileStats.name.substring(0, fileStats.name.indexOf('.')),
                 path: `${root}/${fileStats.name}`,
-                name: fileStats.name
-            });
+                model: null,
+                selected: false,
+                type: ProjectFileType.Generic
+            }
+
+            files.push(projectFile);
 
             next();
         });
@@ -107,23 +115,28 @@ export class ProjectStore {
         });
     }
 
-    buildModels() {
-        Object.keys(this.projectFiles).map((k: string, i: number) => {
-
-            if (!Array.isArray(this.projectFiles[k])) {
-                if (this.projectFiles[k].name.endsWith('.js')) {
-                    const model = monaco.editor.createModel(fs.readFileSync(this.projectFiles[k].path, 'utf8'), 'javascript');
-                    this.projectFiles[k].model = model;
-                }
-            } else {
-                this.projectFiles[k].map((file: any, i: number) => {
-                    if (file.name.endsWith('.js')) {
-                        const model = monaco.editor.createModel(fs.readFileSync(file.path, 'utf8'), 'javascript');
-                        this.projectFiles[k][i].model = model;
-                    }
-                });
+    buildModels(files: IProjectFile[]) {
+        files.map((f, i) => {
+            if (f.name.endsWith('.js')) {
+                f.model = monaco.editor.createModel(fs.readFileSync(f.path, 'utf8'), 'javascript');
             }
         });
+    }
+
+    get mainFile() {
+        return this.projectFiles.filter(f => f.type === ProjectFileType.Main)[0];
+    }
+
+    get viewFiles() {
+        return this.projectFiles.filter(f => f.type === ProjectFileType.View);
+    }
+
+    get componentFiles() {
+        return this.projectFiles.filter(f => f.type === ProjectFileType.Component);
+    }
+
+    get genericFiles() {
+        return this.projectFiles.filter(f => f.type === ProjectFileType.Generic);
     }
 }
 

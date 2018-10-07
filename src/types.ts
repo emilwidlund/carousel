@@ -1,5 +1,26 @@
 import * as monaco from 'monaco-editor';
 
+
+
+// ----- PROJECT
+
+export enum ProjectFileType {
+    Main,
+    View,
+    Component,
+    Generic
+}
+
+export interface IProjectFile {
+    name: string;
+    shortName: string;
+    path: string;
+    model: monaco.editor.IModel;
+    selected: boolean;
+    type: ProjectFileType;
+}
+
+
 // ----- EDITOR
 
 export interface IEditorProps {
@@ -14,15 +35,15 @@ export interface IEditorProps {
 
 // ----- SIDEBAR
 
-export enum ProjectFileItemType {
-    Main,
-    View,
-    Generic
+export interface IProjectFileItemProps {
+    file: IProjectFile;
+    selected: boolean;
+    EditorStore?: any;
 }
 
-export interface IProjectFileItemProps {
-    fileName: string;
-    type: ProjectFileItemType;
+export interface ISidebarProps {
+    ProjectStore?: any;
+    EditorStore?: any;
 }
 
 

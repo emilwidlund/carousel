@@ -4,21 +4,27 @@ import {inject, observer} from 'mobx-react';
 
 import Icon from './Icon';
 
-import {IProjectFileItemProps, ProjectFileItemType} from '../types';
+import {ISidebarProps, IProjectFileItemProps, IProjectFile, ProjectFileType} from '../types';
 
+@inject('EditorStore')
+@observer
 class ProjectFileItem extends React.Component<IProjectFileItemProps> {
+    handleClick() {
+        this.props.EditorStore.selectedFile = this.props.file;
+    }
+
     render() {
 
         let iconName;
 
-        switch (this.props.type) {
-            case ProjectFileItemType.Main:
+        switch (this.props.file.type) {
+            case ProjectFileType.Main:
                 iconName = 'all_inclusive';
                 break;
-            case ProjectFileItemType.View:
+            case ProjectFileType.View:
                 iconName = 'panorama_horizontal';
                 break;
-            case ProjectFileItemType.Generic:
+            case ProjectFileType.Generic:
                 iconName = 'bookmark';
                 break;
             default:
@@ -26,18 +32,23 @@ class ProjectFileItem extends React.Component<IProjectFileItemProps> {
         }
 
         return (
-            <div className={classnames(['project-file-item'])}>
+            <div 
+                className={classnames([
+                    'project-file-item', 
+                    this.props.selected ? 'active' : null
+                ])}
+                onClick={this.handleClick.bind(this)}
+            >
                 <Icon name={iconName} />
-                <span>{this.props.fileName}</span>
+                <span>{this.props.file.shortName}</span>
             </div>
         );
     }
 }
 
-@inject('ProjectStore')
+@inject('ProjectStore', 'EditorStore')
 @observer
-export default class Sidebar extends React.Component<any> {
-
+export default class Sidebar extends React.Component<ISidebarProps> {
     render() {
         return (
             <div id="sidebar">
@@ -47,19 +58,33 @@ export default class Sidebar extends React.Component<any> {
                 </div>
                 <div className="sidebar-navigator">
                     <div className="main">
-                        <ProjectFileItem fileName="Main" type={ProjectFileItemType.Main} />
+                        <ProjectFileItem 
+                            file={this.props.ProjectStore.mainFile} 
+                            selected={this.props.ProjectStore.mainFile === this.props.EditorStore.selectedFile}
+                        />
                     </div>
                     <div className="view">
                         <h4>Views</h4>
-                        {this.props.ProjectStore.projectFiles.views.map((file: any, index: number) => {
-                            const name = file.name.substring(0, file.name.indexOf('.'));
-                            return <ProjectFileItem key={index} fileName={name} type={ProjectFileItemType.View} />;
+                        {this.props.ProjectStore.viewFiles.map((file: IProjectFile, index: number) => {
+                            return (
+                                <ProjectFileItem 
+                                    key={index} 
+                                    file={file} 
+                                    selected={file === this.props.EditorStore.selectedFile}
+                                />
+                            );
                         })}
                     </div>
                     <div className="generic">
                         <h4>Generic</h4>
-                        {this.props.ProjectStore.projectFiles.generic.map((file: any, index: number) => {
-                            return <ProjectFileItem key={index} fileName={file.name} type={ProjectFileItemType.Generic} />;
+                        {this.props.ProjectStore.genericFiles.map((file: IProjectFile, index: number) => {
+                            return (
+                                <ProjectFileItem
+                                    key={index} 
+                                    file={file}
+                                    selected={file === this.props.EditorStore.selectedFile}
+                                />
+                            );
                         })}
                     </div>
                 </div>
