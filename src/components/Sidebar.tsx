@@ -40,7 +40,13 @@ class ProjectFileItem extends React.Component<IProjectFileItemProps> {
                 onClick={this.handleClick.bind(this)}
             >
                 <Icon name={iconName} />
-                <span>{this.props.file.shortName}</span>
+                <span>
+                    {
+                        this.props.file.type === ProjectFileType.Generic ? 
+                        this.props.file.name : 
+                        this.props.file.shortName
+                    }
+                </span>
             </div>
         );
     }
