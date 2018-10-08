@@ -58,6 +58,7 @@ class ProjectFileItem extends React.Component<IProjectFileItemProps> {
 @observer
 export default class Sidebar extends React.Component<ISidebarProps> {
     componentDidMount() {
+
         window.onbeforeunload = (e) => {
             e.returnValue = false;
             remote.dialog.showMessageBox({
@@ -74,6 +75,7 @@ export default class Sidebar extends React.Component<ISidebarProps> {
                 }
             });
         }
+        
     }
 
     render() {
