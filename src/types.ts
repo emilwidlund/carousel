@@ -25,6 +25,7 @@ export interface IProjectFile {
 
 export interface IEditorProps {
     EditorStore?: any;
+    ProjectStore?: any;
     value?: string;
     language?: string;
     uri?: monaco.Uri;

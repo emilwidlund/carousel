@@ -83,7 +83,7 @@ export class ProjectStore {
 
                         this.projectInitialized = true;
                         
-                        EditorStore.selectedFile = this.mainFile;
+                        EditorStore.selectFile(this.mainFile);
                     });
                 });
         });
@@ -120,6 +120,48 @@ export class ProjectStore {
             if (f.name.endsWith('.js')) {
                 f.model = monaco.editor.createModel(fs.readFileSync(f.path, 'utf8'), 'javascript');
             }
+        });
+    }
+
+    saveFile(file: IProjectFile, cb?: Function) {
+        fs.writeFile(file.path, file.model.getValue(), (err: Error) => {
+            if (err) return console.error(err);
+
+            console.log('File Saved!');
+
+            cb();
+        });
+    }
+
+    saveProject() {
+        const walker = walk.walk(this.projectTempPath);
+
+        walker.on('file', (root: string, fileStats: any, next: Function) => {
+
+            let folder = root.substring(root.lastIndexOf('\\') + 1, root.length);
+            const filename = fileStats.name;
+
+            if (folder.endsWith('project')) {
+                folder = null;
+            }
+
+            const path = folder ? `${folder}/${filename}` : filename;
+
+            zip.file(path, fs.readFileSync(`${root}/${fileStats.name}`));
+            next();
+        });
+
+        walker.on('end', () => {
+            const data = zip.generate({
+                base64: false,
+                compression: 'DEFLATE'
+            });
+    
+            fs.writeFile(this.projectPath, data, 'binary', (err: Error) => {
+                if (err) console.error(err);
+
+                console.log('Project Saved!');
+            });
         });
     }
 

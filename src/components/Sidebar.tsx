@@ -10,7 +10,7 @@ import {ISidebarProps, IProjectFileItemProps, IProjectFile, ProjectFileType} fro
 @observer
 class ProjectFileItem extends React.Component<IProjectFileItemProps> {
     handleClick() {
-        this.props.EditorStore.selectedFile = this.props.file;
+        this.props.EditorStore.selectFile(this.props.file);
     }
 
     render() {
