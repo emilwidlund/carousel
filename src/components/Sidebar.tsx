@@ -30,7 +30,7 @@ class ProjectFileItem extends React.Component<IProjectFileItemProps> {
                 iconName = 'bubble_chart';
                 break;
             default:
-                iconName = 'bookmark';
+                iconName = 'description';
         }
 
         return (

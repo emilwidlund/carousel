@@ -6,7 +6,8 @@ const fs = remote.require('fs');
 const walk = remote.require('walk');
 const path = remote.require('path');
 const zip = remote.require('node-zip')();
-const unzip = remote.require('unzip');
+const archiver = remote.require('archiver');
+const unzip = remote.require('unzip-stream');
 const temp = remote.require('temp').track();
 
 import EditorStore from './EditorStore';
@@ -22,35 +23,17 @@ export class ProjectStore {
     @observable projectFiles: IProjectFile[] = [];
 
     createProject(projectPath: string) {
-        const walker = walk.walk(path.resolve('./src/templates/project'));
+        const output = fs.createWriteStream(projectPath);
+        const archive = archiver('zip');
 
-        walker.on('file', (root: string, fileStats: any, next: Function) => {
-
-            let folder = root.substring(root.lastIndexOf('\\') + 1, root.length);
-            const filename = fileStats.name;
-
-            if (folder.endsWith('project')) {
-                folder = null;
-            }
-
-            const path = folder ? `${folder}/${filename}` : filename;
-
-            zip.file(path, fs.readFileSync(`${root}/${fileStats.name}`));
-            next();
+        output.on('close', () => {
+            console.log('Project Created!');
+            this.initializeProject(projectPath);
         });
 
-        walker.on('end', () => {
-            const data = zip.generate({
-                base64: false,
-                compression: 'DEFLATE'
-            });
-    
-            fs.writeFile(projectPath, data, 'binary', (err: Error) => {
-                if (err) console.error(err);
-
-                this.initializeProject(projectPath);
-            });
-        });
+        archive.pipe(output);
+        archive.directory('./src/templates/project', false);
+        archive.finalize();
     }
 
     initializeProject(projectPath: string) {
@@ -137,39 +120,17 @@ export class ProjectStore {
 
     saveProject(cb?: Function) {
         this.saveFile(EditorStore.selectedFile, () => {
+            const output = fs.createWriteStream(this.projectPath);
+            const archive = archiver('zip');
 
-            const walker = walk.walk(this.projectTempPath);
-
-            walker.on('file', (root: string, fileStats: any, next: Function) => {
-
-                let folder = root.substring(root.lastIndexOf('\\') + 1, root.length);
-                const filename = fileStats.name;
-
-                if (filename === 'Main.js' || filename === 'index.html') {
-                    folder = null;
-                }
-
-                const path = folder ? `${folder}/${filename}` : filename;
-
-                zip.file(path, fs.readFileSync(`${root}/${fileStats.name}`));
-                next();
+            output.on('close', () => {
+                console.log('Project Saved!');
+                if (cb) cb();
             });
 
-            walker.on('end', () => {
-                const data = zip.generate({
-                    base64: false,
-                    compression: 'DEFLATE'
-                });
-        
-                fs.writeFile(this.projectPath, data, 'binary', (err: Error) => {
-                    if (err) return console.error(err);
-
-                    console.log('Project Saved!');
-
-                    if (cb) cb();
-                });
-            });
-
+            archive.pipe(output);
+            archive.directory(this.projectTempPath, false);
+            archive.finalize();
         });
     }
 

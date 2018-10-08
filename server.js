@@ -8,7 +8,7 @@ module.exports = (servePath, cb) => {
 
     const config = {
         entry: {
-            app: ['webpack/hot/dev-server', `${servePath}/Main.js`]
+            app: ['webpack/hot/dev-server', `${servePath}/app.js`]
         },
         mode: 'development',
         target: 'electron-renderer',
@@ -29,6 +29,10 @@ module.exports = (servePath, cb) => {
                             '@babel/plugin-proposal-class-properties'
                         ]
                     }
+                },
+                {
+                    test: /\.coffee$/,
+                    use: ['coffee-loader']
                 }
             ]
         },
