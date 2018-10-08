@@ -5,4 +5,8 @@ const view = new Layer({
     backgroundColor: '#000'
 });
 
+const cc = new CardCarousel({
+    parent: view
+});
+
 export default view;
