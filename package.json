@@ -26,6 +26,7 @@
     "classnames": "^2.2.6",
     "css-loader": "^1.0.0",
     "electron": "^3.0.2",
+    "express": "^4.16.3",
     "gsap": "^2.0.2",
     "mobx": "^5.5.0",
     "mobx-react": "^5.2.8",

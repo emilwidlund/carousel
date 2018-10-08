@@ -1,4 +1,6 @@
-const {app, BrowserWindow} = require('electron');
+const {app, ipcMain, BrowserWindow} = require('electron');
+
+const server = require('./server');
 
 app.on('window-all-closed', () => {
     if (process.platform != 'darwin') {
@@ -19,5 +21,24 @@ app.on('ready', () => {
 
     mainWindow.on('closed', () => {
         mainWindow = null;
+    });
+});
+
+ipcMain.on('start-preview', (event, arg) => {
+
+    server(arg, () => {
+        let previewWindow = new BrowserWindow({
+            title: 'Preview',
+            width: 1360,
+            height: 800
+        });
+    
+        previewWindow.loadURL('http://localhost:8010');
+    
+        previewWindow.openDevTools();
+    
+        previewWindow.on('closed', () => {
+            previewWindow = null;
+        });
     });
 });

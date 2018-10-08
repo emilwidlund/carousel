@@ -1,7 +1,7 @@
 import {observable} from 'mobx';
 import * as monaco from 'monaco-editor';
 
-import {remote} from 'electron';
+import {remote, ipcRenderer} from 'electron';
 const fs = remote.require('fs');
 const walk = remote.require('walk');
 const path = remote.require('path');
@@ -57,7 +57,7 @@ export class ProjectStore {
         this.projectPath = projectPath;
         this.projectName = projectPath.substring(projectPath.lastIndexOf('\\') + 1, projectPath.lastIndexOf('.crsl'));
 
-        temp.mkdir({prefix: `carousel-${this.projectName}`}, (err: Error, dirPath: string) => {
+        temp.mkdir(`carousel-${this.projectName}`, (err: Error, dirPath: string) => {
             fs.createReadStream(projectPath)
                 .pipe(unzip.Extract({path: dirPath}))
                 .on('close', () => {
@@ -81,8 +81,10 @@ export class ProjectStore {
                         this.projectFiles = files;
                         this.projectTempPath = dirPath;
 
+                        ipcRenderer.send('start-preview', this.projectTempPath);
+
                         this.projectInitialized = true;
-                        
+
                         EditorStore.selectFile(this.mainFile);
                     });
                 });
@@ -143,7 +145,7 @@ export class ProjectStore {
                 let folder = root.substring(root.lastIndexOf('\\') + 1, root.length);
                 const filename = fileStats.name;
 
-                if (folder.endsWith('project')) {
+                if (filename === 'Main.js' || filename === 'index.html') {
                     folder = null;
                 }
 
