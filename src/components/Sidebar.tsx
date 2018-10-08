@@ -2,6 +2,8 @@ import * as React from 'react';
 import * as classnames from 'classnames';
 import {inject, observer} from 'mobx-react';
 
+import {remote} from 'electron';
+
 import Icon from './Icon';
 
 import {ISidebarProps, IProjectFileItemProps, IProjectFile, ProjectFileType} from '../types';
@@ -55,6 +57,25 @@ class ProjectFileItem extends React.Component<IProjectFileItemProps> {
 @inject('ProjectStore', 'EditorStore')
 @observer
 export default class Sidebar extends React.Component<ISidebarProps> {
+    componentDidMount() {
+        window.onbeforeunload = (e) => {
+            e.returnValue = false;
+            remote.dialog.showMessageBox({
+                type: 'info',
+                buttons: ['Cancel', 'Don\'t Save', 'Save'],
+                message: 'Your project has not been saved. Do you want to proceed?'
+            }, (response: number) => {
+                if (response === 1) {
+                    remote.getCurrentWindow().destroy();
+                } else if (response === 2) {
+                    this.props.ProjectStore.saveProject(() => {
+                        remote.getCurrentWindow().destroy();
+                    });
+                }
+            });
+        }
+    }
+
     render() {
         return (
             <div id="sidebar">

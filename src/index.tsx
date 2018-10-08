@@ -13,8 +13,10 @@ import {remote} from 'electron';
 import './scss/main.scss';
 
 
+
 const framerTheme = require('./misc/framer-theme.json');
 monaco.editor.defineTheme('syntax', framerTheme);
+
 
 @observer
 class App extends React.Component {

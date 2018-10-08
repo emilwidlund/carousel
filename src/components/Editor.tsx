@@ -17,9 +17,7 @@ export default class Editor extends React.Component<IEditorProps, {}> {
         this._editor = monaco.editor.create(this._node, options);
 
         this._editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KEY_S, () => {
-            this.props.ProjectStore.saveFile(this.props.EditorStore.selectedFile, () => {
-                this.props.ProjectStore.saveProject();
-            });
+            this.props.ProjectStore.saveProject();
         }, '');
 
         reaction(

@@ -129,39 +129,45 @@ export class ProjectStore {
 
             console.log('File Saved!');
 
-            cb();
+            if (cb) cb();
         });
     }
 
-    saveProject() {
-        const walker = walk.walk(this.projectTempPath);
+    saveProject(cb?: Function) {
+        this.saveFile(EditorStore.selectedFile, () => {
 
-        walker.on('file', (root: string, fileStats: any, next: Function) => {
+            const walker = walk.walk(this.projectTempPath);
 
-            let folder = root.substring(root.lastIndexOf('\\') + 1, root.length);
-            const filename = fileStats.name;
+            walker.on('file', (root: string, fileStats: any, next: Function) => {
 
-            if (folder.endsWith('project')) {
-                folder = null;
-            }
+                let folder = root.substring(root.lastIndexOf('\\') + 1, root.length);
+                const filename = fileStats.name;
 
-            const path = folder ? `${folder}/${filename}` : filename;
+                if (folder.endsWith('project')) {
+                    folder = null;
+                }
 
-            zip.file(path, fs.readFileSync(`${root}/${fileStats.name}`));
-            next();
-        });
+                const path = folder ? `${folder}/${filename}` : filename;
 
-        walker.on('end', () => {
-            const data = zip.generate({
-                base64: false,
-                compression: 'DEFLATE'
+                zip.file(path, fs.readFileSync(`${root}/${fileStats.name}`));
+                next();
             });
-    
-            fs.writeFile(this.projectPath, data, 'binary', (err: Error) => {
-                if (err) console.error(err);
 
-                console.log('Project Saved!');
+            walker.on('end', () => {
+                const data = zip.generate({
+                    base64: false,
+                    compression: 'DEFLATE'
+                });
+        
+                fs.writeFile(this.projectPath, data, 'binary', (err: Error) => {
+                    if (err) return console.error(err);
+
+                    console.log('Project Saved!');
+
+                    if (cb) cb();
+                });
             });
+
         });
     }
 
