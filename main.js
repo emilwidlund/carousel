@@ -2,6 +2,8 @@ const {app, ipcMain, BrowserWindow} = require('electron');
 
 const server = require('./server');
 
+let mainWindow;
+
 app.on('window-all-closed', () => {
     if (process.platform != 'darwin') {
         app.quit();
@@ -9,7 +11,7 @@ app.on('window-all-closed', () => {
 })
 
 app.on('ready', () => {
-    let mainWindow = new BrowserWindow({
+    mainWindow = new BrowserWindow({
         title: 'Carousel',
         width: 1360,
         height: 800
@@ -30,7 +32,9 @@ ipcMain.on('start-preview', (event, arg) => {
         let previewWindow = new BrowserWindow({
             title: 'Preview',
             width: 1360,
-            height: 800
+            height: 800,
+            parent: mainWindow,
+            experimentalFeatures: true
         });
     
         previewWindow.loadURL('http://localhost:8010');

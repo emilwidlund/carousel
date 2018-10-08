@@ -16,6 +16,22 @@ module.exports = (servePath, cb) => {
             path: servePath,
             filename: 'bundle.js'
         },
+        module: {
+            rules: [
+                {
+                    test: /\.js$/,
+                    loader: 'babel-loader',
+                    options: {
+                        babelrc: false,
+                        presets: ['@babel/preset-env'],
+                        plugins: [
+                            ['@babel/plugin-proposal-decorators', {legacy: true}],
+                            '@babel/plugin-proposal-class-properties'
+                        ]
+                    }
+                }
+            ]
+        },
         plugins: [new webpack.HotModuleReplacementPlugin()]
     }
 
