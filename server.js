@@ -7,19 +7,20 @@ const PORT = 8010;
 module.exports = (servePath, cb) => {
 
     const config = {
-        entry: `${servePath}/Main.js`,
+        entry: {
+            app: ['webpack/hot/dev-server', `${servePath}/Main.js`]
+        },
         mode: 'development',
         target: 'electron-renderer',
         output: {
             path: servePath,
             filename: 'bundle.js'
-        }
+        },
+        plugins: [new webpack.HotModuleReplacementPlugin()]
     }
 
     const options = {
-        contentBase: servePath,
-        inline: true,
-        hot: true
+        contentBase: servePath
     };
 
     const server = new WebpackDevServer(webpack(config), options);
