@@ -87,7 +87,7 @@ class NewProjectPopup extends React.Component<any> {
                     <Button
                         secondary={true}
                         text="Cancel"
-                        onClick={() => this.props.PopupStore.disposePopup}
+                        onClick={() => this.props.PopupStore.disposePopup()}
                     />
                 </div>
             </div>

@@ -23,7 +23,7 @@ export class ProjectStore {
     @observable projectFiles: IProjectFile[] = [];
 
     createProject(projectType: string, projectPath: string, cb?: Function) {
-        const projectTemplate: string = projectType === 'coffee' ? './src/templates/project-coffeescript': './src/templates/project-javascript';
+        const projectTemplate: string = projectType === 'coffee' ? './src/templates/project-coffeescript' : './src/templates/project-javascript';
 
         const output = fs.createWriteStream(projectPath);
         const archive = archiver('zip');
