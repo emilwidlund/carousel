@@ -62,9 +62,10 @@ export default class Sidebar extends React.Component<ISidebarProps> {
         window.onbeforeunload = (e) => {
             e.returnValue = false;
             remote.dialog.showMessageBox({
-                type: 'info',
+                type: 'warning',
                 buttons: ['Cancel', 'Don\'t Save', 'Save'],
-                message: 'Your project has not been saved. Do you want to proceed?'
+                message: 'Your project has not been saved. How do you want to proceed?',
+                noLink: true
             }, (response: number) => {
                 if (response === 1) {
                     remote.getCurrentWindow().destroy();

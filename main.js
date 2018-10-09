@@ -27,7 +27,6 @@ app.on('ready', () => {
 });
 
 ipcMain.on('start-preview', (event, arg) => {
-
     server(arg, () => {
         let previewWindow = new BrowserWindow({
             title: 'Preview',
