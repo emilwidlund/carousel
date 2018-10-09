@@ -1,0 +1,1 @@
+{HomeView} = require './views/Home.view.coffee'

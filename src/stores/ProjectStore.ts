@@ -32,7 +32,7 @@ export class ProjectStore {
         });
 
         archive.pipe(output);
-        archive.directory('./src/templates/project', false);
+        archive.directory('./src/templates/project-javascript', false);
         archive.finalize();
     }
 
@@ -48,11 +48,11 @@ export class ProjectStore {
                     this.traverseFiles(dirPath, (files: IProjectFile[]) => {
                         files.map((file: any, index: number) => {
 
-                            if (file.name.includes('Main.js')) {
+                            if (file.name.includes('Main.js') || file.name.includes('Main.coffee')) {
                                 file.type = ProjectFileType.Main;
-                            } else if (file.name.includes('.view.js')) {
+                            } else if (file.name.includes('.view.js') || file.name.includes('.view.coffee')) {
                                 file.type = ProjectFileType.View;
-                            } else if (file.name.includes('.component.js')) {
+                            } else if (file.name.includes('.component.js') || file.name.includes('.component.coffee')) {
                                 file.type = ProjectFileType.Component;
                             }
 
@@ -104,6 +104,8 @@ export class ProjectStore {
         files.map((f, i) => {
             if (f.name.endsWith('.js')) {
                 f.model = monaco.editor.createModel(fs.readFileSync(f.path, 'utf8'), 'javascript');
+            } else if (f.name.endsWith('.coffee')) {
+                f.model = monaco.editor.createModel(fs.readFileSync(f.path, 'utf8'), 'coffeescript');
             }
         });
     }
