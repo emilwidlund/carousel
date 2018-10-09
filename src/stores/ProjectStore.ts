@@ -22,17 +22,20 @@ export class ProjectStore {
     @observable projectName: string = null;
     @observable projectFiles: IProjectFile[] = [];
 
-    createProject(projectPath: string) {
+    createProject(projectType: string, projectPath: string, cb?: Function) {
+        const projectTemplate: string = projectType === 'coffee' ? './src/templates/project-coffeescript': './src/templates/project-javascript';
+
         const output = fs.createWriteStream(projectPath);
         const archive = archiver('zip');
 
         output.on('close', () => {
             console.log('Project Created!');
+            if (cb) cb();
             this.initializeProject(projectPath);
         });
 
         archive.pipe(output);
-        archive.directory('./src/templates/project-javascript', false);
+        archive.directory(projectTemplate, false);
         archive.finalize();
     }
 

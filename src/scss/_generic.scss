@@ -1,0 +1,59 @@
+button {
+    background-color: $color-accent;
+    color: #fff;
+    border: none;
+    font-family: inherit;
+    font-size: $font-size-xs;
+    padding: 10px 15px 8px;
+    border-radius: 50px;
+
+    &.secondary {
+        background-color: #222;
+    }
+
+    &:hover {
+        opacity: .8;
+    }
+    
+    &:focus {
+        outline: none !important;
+    }
+}
+
+input {
+    background-color: transparent;
+    padding: 0 0 3px;
+    border: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, .2);
+    color: #fff;
+
+    &:focus {
+        outline: none !important;
+    }
+}
+
+input[type="radio"] {
+    position: relative;
+    width: 16px;
+    height: 16px;
+    border-radius: 8px;
+    background-color: #333;
+    border: none;
+    margin: 0;
+    -webkit-appearance: none;
+
+    &:checked {
+        background-color: $color-accent;
+    }
+
+    &:checked:after {
+        content: '';
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        height: 6px;
+        width: 6px;
+        border-radius: 3px;
+        background-color: #fff;
+    }
+}

@@ -4,6 +4,7 @@ import {Provider, observer} from 'mobx-react';
 import * as monaco from 'monaco-editor';
 
 import * as stores from './stores';
+import Popup from './components/Popup';
 import Sidebar from './components/Sidebar';
 import Welcome from './components/Welcome';
 import Editor from './components/Editor';
@@ -30,16 +31,11 @@ class App extends React.Component {
         }
     }
 
-    handleEditorValueChange(value: string) {
-        console.log(value);
-    }
-
     renderContent() {
         return (
             <div id="app">
                 <Sidebar />
                 <Editor 
-                    onValueChange={this.handleEditorValueChange}
                     options={{
                         theme: 'syntax',
                         selectOnLineNumbers: true,
@@ -58,11 +54,18 @@ class App extends React.Component {
     render() {
         return (
             <Provider {...stores}>
-                {
-                    stores.ProjectStore.projectInitialized ? 
-                    this.renderContent() : 
-                    <Welcome />
-                }
+                <div id="carousel-content">
+                    {
+                        stores.PopupStore.popupContent ? 
+                        <Popup>{stores.PopupStore.popupContent}</Popup> : 
+                        null
+                    }
+                    {
+                        stores.ProjectStore.projectInitialized ? 
+                        this.renderContent() : 
+                        <Welcome />
+                    }
+                </div>
             </Provider>
         );
     }

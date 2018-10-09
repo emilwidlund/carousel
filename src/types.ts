@@ -48,6 +48,15 @@ export interface ISidebarProps {
 }
 
 
+// ----- BUTTON
+
+export interface IButtonProps {
+    text: string;
+    secondary?: boolean;
+    onClick?(): void;
+}
+
+
 // ----- ICON
 
 export interface IIconProps {

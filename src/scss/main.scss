@@ -1,6 +1,7 @@
 @import 'variables';
 @import 'reset';
 @import 'fonts';
+@import 'generic';
 
 body {
     display: flex;
@@ -9,7 +10,7 @@ body {
     font-size: $font-size-s;
     color: $color-text;
 
-    #carousel, #app {
+    #carousel, #carousel-content, #app {
         display: flex;
         flex-grow: 1;
     }
@@ -18,3 +19,4 @@ body {
 @import '../components/Sidebar';
 @import '../components/Welcome';
 @import '../components/Editor';
+@import '../components/Popup';
