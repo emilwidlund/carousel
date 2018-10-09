@@ -1,6 +1,10 @@
 $sidebar-padding-horizontal: 20px;
 
 #sidebar {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
     width: 300px;
     background-color: $color-bg-sidebar;
     border-right: 1px solid $color-divider;
@@ -39,7 +43,15 @@ $sidebar-padding-horizontal: 20px;
 
             &.active {
                 color: #fff;
-                background-color: rgba(255, 255, 255, .05);
+                background-color: $color-accent;
+
+                .icon {
+                    color: #fff;
+                }
+
+                &:hover {
+                    background-color: $color-accent;
+                }
             }
 
             &:hover {

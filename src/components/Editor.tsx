@@ -32,16 +32,19 @@ export default class Editor extends React.Component<IEditorProps, {}> {
         this._editor && this._editor.dispose();
     }
 
+    renderMeta() {
+        return (
+            <div className="editor-meta">
+                <h2>{this.props.EditorStore.selectedFile.shortName}</h2>
+                <span>{this.props.EditorStore.selectedFile.path}</span>
+            </div>
+        );
+    }
+
     render() {
         return (
             <div id="editor-wrapper">
-                <div className="editor-meta">
-                    {
-                        this.props.EditorStore.selectedFile ?
-                        <h3>{this.props.EditorStore.selectedFile.shortName}</h3> :
-                        null
-                    }
-                </div>
+                {this.props.EditorStore.selectedFile ? this.renderMeta() : null}
                 <div 
                     className="editor"
                     ref={c => this._node = c} 
