@@ -13,7 +13,8 @@ class exports.Background extends Layer
         @gradientLayer = {}
 
         viewStore.on 'transitionEvent', (transitionEvent) =>
-            @populateBackground(transitionEvent.view.background)
+            if (transitionEvent.view.background)
+                @populateBackground(transitionEvent.view.background)
 
     populateBackground: (background) ->
 

@@ -24,6 +24,7 @@ export class ProjectStore {
 
     createProject(projectType: string, projectPath: string, cb?: Function) {
         const projectTemplate: string = projectType === 'coffee' ? './src/templates/project-coffeescript' : './src/templates/project-javascript';
+        const modulesTemplate: string = './src/templates/modules';
 
         const output = fs.createWriteStream(projectPath);
         const archive = archiver('zip');
@@ -36,6 +37,7 @@ export class ProjectStore {
 
         archive.pipe(output);
         archive.directory(projectTemplate, false);
+        archive.directory(modulesTemplate, 'modules');
         archive.finalize();
     }
 

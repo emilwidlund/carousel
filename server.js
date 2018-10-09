@@ -10,6 +10,9 @@ module.exports = (servePath, cb) => {
         entry: {
             app: ['webpack/hot/dev-server', `${servePath}/app.js`]
         },
+        resolve: {
+            extensions: ['.js', '.coffee']
+        },
         mode: 'development',
         target: 'electron-renderer',
         output: {

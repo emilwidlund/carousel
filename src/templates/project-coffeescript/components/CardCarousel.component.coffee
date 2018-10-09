@@ -1,4 +1,4 @@
-{FocusStore} = require '../modules/joystick.coffee'
+{FocusStore} = require '../modules/joystick'
 
 class exports.CardCarousel extends ScrollComponent
     constructor: (props={}) ->
