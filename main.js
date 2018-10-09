@@ -34,7 +34,8 @@ ipcMain.on('start-preview', (event, arg) => {
             width: 1360,
             height: 800,
             parent: mainWindow,
-            experimentalFeatures: true
+            experimentalFeatures: true,
+            autoHideMenuBar: true
         });
     
         previewWindow.loadURL('http://localhost:8010');
