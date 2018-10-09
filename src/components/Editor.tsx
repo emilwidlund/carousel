@@ -34,10 +34,19 @@ export default class Editor extends React.Component<IEditorProps, {}> {
 
     render() {
         return (
-            <div 
-                id="editor"
-                ref={c => this._node = c} 
-            />
+            <div id="editor-wrapper">
+                <div className="editor-meta">
+                    {
+                        this.props.EditorStore.selectedFile ?
+                        <h3>{this.props.EditorStore.selectedFile.shortName}</h3> :
+                        null
+                    }
+                </div>
+                <div 
+                    className="editor"
+                    ref={c => this._node = c} 
+                />
+            </div>
         );
     }
 }

@@ -27,7 +27,7 @@ app.on('ready', () => {
 });
 
 ipcMain.on('start-preview', (event, arg) => {
-    server(arg, () => {
+    server.start(arg, () => {
         let previewWindow = new BrowserWindow({
             title: 'Preview',
             width: 1360,
@@ -43,6 +43,10 @@ ipcMain.on('start-preview', (event, arg) => {
     
         previewWindow.on('closed', () => {
             previewWindow = null;
+        });
+
+        mainWindow.on('closed', () => {
+            server.close();
         });
     });
 });

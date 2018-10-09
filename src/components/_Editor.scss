@@ -1,4 +1,18 @@
-#editor {
+#editor-wrapper {
     display: flex;
+    flex-direction: column;
     flex-grow: 1;
+    background-color: #000;
+
+    .editor-meta {
+        display: flex;
+        padding: 30px 40px;
+        border-bottom: 1px solid $color-divider;
+    }
+
+    .editor {
+        display: flex;
+        flex-grow: 1;
+        padding-top: 20px;
+    }
 }

@@ -8,7 +8,7 @@ const path = remote.require('path');
 const zip = remote.require('node-zip')();
 const archiver = remote.require('archiver');
 const unzip = remote.require('unzip-stream');
-const temp = remote.require('temp').track();
+const temp = remote.require('temp');
 
 import EditorStore from './EditorStore';
 
