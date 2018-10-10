@@ -16,6 +16,20 @@ body {
     }
 }
 
+
+// Scrollbar Style
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background-color: #131313;
+} 
+
+::-webkit-scrollbar-thumb {
+    background-color: #333;
+}
+
+
+
 @import '../components/Sidebar';
 @import '../components/Welcome';
 @import '../components/Editor';
