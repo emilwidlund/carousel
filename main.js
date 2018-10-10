@@ -19,7 +19,7 @@ app.on('ready', () => {
 
     mainWindow.loadURL('http://localhost:8000');
 
-    mainWindow.openDevTools();
+    // mainWindow.openDevTools();
 
     mainWindow.on('closed', () => {
         mainWindow = null;
@@ -39,10 +39,11 @@ ipcMain.on('start-preview', (event, arg) => {
     
         previewWindow.loadURL('http://localhost:8010');
     
-        previewWindow.openDevTools();
+        // previewWindow.openDevTools();
     
         previewWindow.on('closed', () => {
             previewWindow = null;
+            server.close();
         });
 
         mainWindow.on('closed', () => {
