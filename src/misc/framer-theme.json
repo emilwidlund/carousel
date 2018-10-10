@@ -100,10 +100,10 @@
     "editorMarkerNavigationWarning.background": "#2d2d2d",
 
     "editorOverviewRuler.border": "#2d2d2d",
-    "editorOverviewRuler.commonContentForeground": "#ebbf8355",
-    "editorOverviewRuler.currentContentForeground": "#ee3a4355",
-    "editorOverviewRuler.incomingContentForeground": "#3ad90055",
-    "editorRuler.foreground": "#fff",
+    "editorOverviewRuler.commonContentForeground": "#000",
+    "editorOverviewRuler.currentContentForeground": "#000",
+    "editorOverviewRuler.incomingContentForeground": "#000",
+    "editorRuler.foreground": "#000",
 
     "editorSuggestWidget.background": "#111",
     "editorSuggestWidget.border": "#2d2d2d",

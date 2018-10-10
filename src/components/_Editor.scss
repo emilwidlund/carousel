@@ -1,20 +1,22 @@
 #editor-wrapper {
     display: flex;
     flex-direction: column;
-    background-color: #000;
     flex-grow: 1;
+    background-color: #000;
+    width: 100%;
+    height: 100%;
 
     .editor-meta {
         display: flex;
         flex-direction: column;
-        flex-grow: 1;
         padding: 20px 30px;
         border-bottom: 1px solid $color-divider;
     }
 
     .editor {
         display: flex;
+        flex-direction: column;
         flex-grow: 1;
-        margin: 20px 0;
+        flex-shrink: 1;
     }
 }

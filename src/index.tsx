@@ -43,6 +43,7 @@ class App extends React.Component {
                         minimap: {
                             enabled: false
                         },
+                        overviewRulerBorder: false,
                         automaticLayout: true,
                         fixedOverflowWidgets: true
                     }}

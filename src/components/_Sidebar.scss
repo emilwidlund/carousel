@@ -5,20 +5,20 @@ $sidebar-padding-horizontal: 20px;
     flex-direction: column;
     flex-grow: 0;
     flex-shrink: 0;
+    overflow-y: auto;
     width: 300px;
     background-color: $color-bg-sidebar;
     border-right: 1px solid $color-divider;
     user-select: none;
 
     .sidebar-header {
-        display: flex;
-        flex-direction: column;
         padding: 40px $sidebar-padding-horizontal;
     }
 
     .sidebar-navigator {
         display: flex;
         flex-direction: column;
+        flex-grow: 1;
 
         .views, .components, .generic {
             padding: 10px 0;
