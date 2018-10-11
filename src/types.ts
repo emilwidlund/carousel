@@ -4,6 +4,12 @@ import * as monaco from 'monaco-editor';
 
 // ----- PROJECT
 
+export interface IRecentProject {
+    path: string;
+    name: string;
+    lastOpen: number;
+}
+
 export enum ProjectFileType {
     Main,
     View,

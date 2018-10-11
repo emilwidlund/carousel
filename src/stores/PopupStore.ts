@@ -13,5 +13,5 @@ export class PopupStore {
     }
 }
 
-const store = new PopupStore();
-export default store;
+const popupStore = new PopupStore();
+export default popupStore;

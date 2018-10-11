@@ -9,18 +9,28 @@ const zip = remote.require('node-zip')();
 const archiver = remote.require('archiver');
 const unzip = remote.require('unzip-stream');
 const temp = remote.require('temp');
+const Store = remote.require('electron-store');
 
 import EditorStore from './EditorStore';
 
-import {IProjectFile, ProjectFileType} from '../types';
+import {IRecentProject, IProjectFile, ProjectFileType} from '../types';
+
+const store = new Store();
 
 export class ProjectStore {
+
+    recentProjects: IRecentProject[] = [];
 
     @observable projectInitialized = false;
     @observable projectPath: string = null;
     @observable projectTempPath: string = null;
     @observable projectName: string = null;
     @observable projectFiles: IProjectFile[] = [];
+
+    constructor() {
+        this.recentProjects = store.get('recent-projects') || [];
+        console.log(this.recentProjects);
+    }
 
     createProject(projectType: string, projectPath: string, cb?: Function) {
         const projectTemplate: string = projectType === 'coffee' ? './src/templates/project-coffeescript' : './src/templates/project-javascript';
@@ -72,6 +82,12 @@ export class ProjectStore {
                         ipcRenderer.send('start-preview', this.projectTempPath);
 
                         this.projectInitialized = true;
+
+                        this.addToRecentProjects({
+                            path: this.projectPath,
+                            name: this.projectName,
+                            lastOpen: Date.now()
+                        });
 
                         EditorStore.selectFile(this.mainFile);
                     });
@@ -141,6 +157,23 @@ export class ProjectStore {
         });
     }
 
+    addToRecentProjects(project: IRecentProject) {
+        let existingProject = this.recentProjects.find(p => p.path === project.path);
+
+        if (existingProject) {
+            const existingIndex = this.recentProjects.indexOf(existingProject);
+            this.recentProjects[existingIndex] = project;
+
+            this.recentProjects.sort((a: IRecentProject, b: IRecentProject) => {
+                return b.lastOpen - a.lastOpen;
+            });
+        } else {
+            this.recentProjects.unshift(project);
+        }
+
+        store.set('recent-projects', this.recentProjects);
+    }
+
     get mainFile() {
         return this.projectFiles.filter(f => f.type === ProjectFileType.Main)[0];
     }
@@ -158,5 +191,5 @@ export class ProjectStore {
     }
 }
 
-const store = new ProjectStore();
-export default store;
+const projectStore = new ProjectStore();
+export default projectStore;

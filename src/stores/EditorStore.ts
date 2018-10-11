@@ -18,5 +18,5 @@ export class EditorStore {
     }
 }
 
-const store = new EditorStore();
-export default store;
+const editorStore = new EditorStore();
+export default editorStore;
