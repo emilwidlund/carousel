@@ -10,6 +10,10 @@ export interface IRecentProject {
     lastOpen: number;
 }
 
+export interface IRecentProjectsProps {
+    ProjectStore?: any;
+}
+
 export enum ProjectFileType {
     Main,
     View,

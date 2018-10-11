@@ -8,7 +8,7 @@ const os = remote.require('os');
 
 import Button from './Button';
 import Icon from './Icon';
-
+import {IRecentProjectsProps, IRecentProject} from '../types';
 
 
 @inject('ProjectStore', 'PopupStore')
@@ -96,6 +96,35 @@ class NewProjectPopup extends React.Component<any> {
 }
 
 
+
+@inject('ProjectStore')
+@observer
+class RecentProjects extends React.Component<IRecentProjectsProps> {
+    render() {
+        return (
+            <div className="recent-projects">
+                {this.props.ProjectStore.recentProjects.map((p: IRecentProject) => {
+                    return (
+                        <div 
+                            className="recent-project"
+                            onClick={() => {
+                                this.props.ProjectStore.initializeProject(p.path);
+                            }}
+                        >
+                            <h4>{p.name}.crsl</h4>
+                            <span>{p.path}</span>
+                        </div>
+                    );
+                })}
+                <div>
+
+                </div>
+            </div>
+        );
+    }
+}
+
+
 @inject('ProjectStore', 'PopupStore')
 @observer
 export default class Welcome extends React.Component<any> {
@@ -121,30 +150,33 @@ export default class Welcome extends React.Component<any> {
     render() {
         return (
             <div id="welcome">
-                <h1>Welcome to Carousel</h1>
-                <p>Version 1.1.6.2</p>
-                <div className="welcome-actions">
-                    <div 
-                        className="action new-project"
-                        onClick={this.handleNewProject.bind(this)}
-                    >
-                        <Icon 
-                            name="add" 
-                            size={48}
-                        />
-                        <h3>New Project</h3>
-                    </div>
-                    <div 
-                        className="action open-project"
-                        onClick={this.handleOpenProject.bind(this)}
-                    >
-                        <Icon 
-                            name="folder" 
-                            size={48}
-                        />
-                        <h3>Open Project</h3>
+                <div className="welcome-info">
+                    <h1>Welcome to Carousel</h1>
+                    <p>Version 1.1.6.2</p>
+                    <div className="welcome-actions">
+                        <div 
+                            className="action new-project"
+                            onClick={this.handleNewProject.bind(this)}
+                        >
+                            <Icon 
+                                name="add" 
+                                size={48}
+                            />
+                            <h3>New Project</h3>
+                        </div>
+                        <div 
+                            className="action open-project"
+                            onClick={this.handleOpenProject.bind(this)}
+                        >
+                            <Icon 
+                                name="folder" 
+                                size={48}
+                            />
+                            <h3>Open Project</h3>
+                        </div>
                     </div>
                 </div>
+                <RecentProjects />
             </div>
         );
     }

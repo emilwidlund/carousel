@@ -29,7 +29,6 @@ export class ProjectStore {
 
     constructor() {
         this.recentProjects = store.get('recent-projects') || [];
-        console.log(this.recentProjects);
     }
 
     createProject(projectType: string, projectPath: string, cb?: Function) {
@@ -52,6 +51,8 @@ export class ProjectStore {
     }
 
     initializeProject(projectPath: string) {
+        if (!projectPath.endsWith('.crsl')) return;
+
         this.projectPath = projectPath;
         this.projectName = projectPath.substring(projectPath.lastIndexOf('\\') + 1, projectPath.lastIndexOf('.crsl'));
 
