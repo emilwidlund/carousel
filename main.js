@@ -17,7 +17,7 @@ app.on('ready', () => {
         height: 800
     });
 
-    mainWindow.loadURL('http://localhost:8000');
+    mainWindow.loadURL(`file://${__dirname}/dist/index.html`);
 
     // mainWindow.openDevTools();
 
