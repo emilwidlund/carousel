@@ -108,8 +108,6 @@ export class ProjectStore {
 
         walker.on('file', (root: string, fileStats: any, next: Function) => {
 
-            console.log(fileStats.name);
-
             const projectFile: IProjectFile = {
                 name: fileStats.name,
                 shortName: fileStats.name.substring(0, fileStats.name.indexOf('.')),

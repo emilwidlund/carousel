@@ -12,9 +12,6 @@ module.exports = {
     mode: 'development',
     devtool: 'source-map',
     target: 'electron-renderer',
-    optimization: {
-        concatenateModules: false
-    },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.json']
     },

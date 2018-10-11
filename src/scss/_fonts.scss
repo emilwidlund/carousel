@@ -1,4 +1,32 @@
+@font-face {
+    font-family: 'MaisonNeue';
+    font-weight: 300;
+    src: url('/fonts/MaisonNeue-Light.ttf');
+}
 
+@font-face {
+    font-family: 'MaisonNeue';
+    font-weight: 400;
+    src: url('/fonts/MaisonNeue-Book.ttf');
+}
+
+@font-face {
+    font-family: 'MaisonNeue';
+    font-weight: 500;
+    src: url('/fonts/MaisonNeue-Medium.ttf');
+}
+
+@font-face {
+    font-family: 'MaisonNeue';
+    font-weight: 600;
+    src: url('/fonts/MaisonNeue-Demi.ttf');
+}
+
+@font-face {
+    font-family: 'MaisonNeue';
+    font-weight: 700;
+    src: url('/fonts/MaisonNeue-Bold.ttf');
+}
 
 h1, h2, h3, h4 {
     font-weight: 400;
@@ -20,6 +48,17 @@ h3 {
 
 h4 {
     font-size: $font-size-s;
+}
+
+@font-face {
+    font-family: 'Material Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url('/fonts/MaterialIconsRegular.eot') format('eot'),
+         url('/fonts/MaterialIcons-Regular.svg') format('svg'),
+         url('/fonts/MaterialIcons-Regular.woff2') format('woff2'),
+         url('/fonts/MaterialIcons-Regular.woff') format('woff'),
+         url('/fonts/MaterialIcons-Regular.ttf') format('truetype');
 }
 
 .material-icon {
