@@ -5,8 +5,95 @@ import {inject, observer} from 'mobx-react';
 import {remote} from 'electron';
 
 import Icon from './Icon';
+import Button from './Button';
 
-import {ISidebarProps, IProjectFileItemProps, IProjectFile, ProjectFileType} from '../types';
+import {
+    ISidebarProps, 
+    IProjectFileCategoryHeaderProps,
+    IProjectFileItemProps, 
+    IProjectFile, 
+    ProjectFileType
+} from '../types';
+
+@inject('ProjectStore', 'PopupStore')
+class CreateFilePopup extends React.Component<any> {
+
+    state = {
+        filename: ''
+    }
+
+    render() {
+
+        let title;
+
+        switch(this.props.type) {
+            case ProjectFileType.View:
+                title = 'Create New View';
+                break;
+            case ProjectFileType.Component:
+                title = 'Create New Component';
+                break;
+            case ProjectFileType.Generic:
+                title = 'Create New Generic File';
+                break;
+            default:
+                title = 'Create New Generic File';
+        }
+
+        return (
+            <div className="create-new-file-popup">
+                <h3>{title}</h3>
+                <input
+                    placeholder="Name"
+                    type="url" 
+                    value={this.state.filename} 
+                    onChange={(e) => {
+                        this.setState({
+                            filename: e.target.value.trim()
+                        });
+                    }}
+                />
+                <div className="new-file-actions">
+                    <Button 
+                        text="Create"
+                        onClick={() => {
+                            if (this.state.filename) {
+                                this.props.ProjectStore.createNewFile(this.props.type, this.state.filename, () => {
+                                    this.props.PopupStore.disposePopup();
+                                });
+                            }
+                        }}
+                    />
+                    <Button 
+                        secondary={true}
+                        text="Cancel"
+                        onClick={() => this.props.PopupStore.disposePopup()}
+                    />
+                </div>
+            </div>
+        );
+    }
+}
+
+@inject('PopupStore')
+class ProjectFileCategoryHeader extends React.Component<IProjectFileCategoryHeaderProps> {
+    render() {
+        return (
+            <div
+                className="file-category-header"
+                onClick={() => {
+                    this.props.PopupStore.displayPopup(<CreateFilePopup type={this.props.type} />);
+                }}
+            >
+                <h4>{this.props.title}</h4>
+                <Icon 
+                    name="add"
+                />
+            </div>
+        );
+    }
+}
+
 
 @inject('EditorStore')
 @observer
@@ -54,7 +141,7 @@ class ProjectFileItem extends React.Component<IProjectFileItemProps> {
     }
 }
 
-@inject('ProjectStore', 'EditorStore')
+@inject('ProjectStore', 'EditorStore', 'PopupStore')
 @observer
 export default class Sidebar extends React.Component<ISidebarProps> {
     componentDidMount() {
@@ -92,7 +179,10 @@ export default class Sidebar extends React.Component<ISidebarProps> {
                         />
                     </div>
                     <div className="views">
-                        <h4>Views</h4>
+                        <ProjectFileCategoryHeader 
+                            title="Views"
+                            type={ProjectFileType.View}
+                        />
                         {this.props.ProjectStore.viewFiles.map((file: IProjectFile, index: number) => {
                             return (
                                 <ProjectFileItem 
@@ -104,7 +194,10 @@ export default class Sidebar extends React.Component<ISidebarProps> {
                         })}
                     </div>
                     <div className="components">
-                        <h4>Components</h4>
+                        <ProjectFileCategoryHeader 
+                            title="Components"
+                            type={ProjectFileType.Component}
+                        />
                         {this.props.ProjectStore.componentFiles.map((file: IProjectFile, index: number) => {
                             return (
                                 <ProjectFileItem 
@@ -116,7 +209,10 @@ export default class Sidebar extends React.Component<ISidebarProps> {
                         })}
                     </div>
                     <div className="generic">
-                        <h4>Generic</h4>
+                        <ProjectFileCategoryHeader 
+                            title="Generic"
+                            type={ProjectFileType.Generic}
+                        />
                         {this.props.ProjectStore.genericFiles.map((file: IProjectFile, index: number) => {
                             return (
                                 <ProjectFileItem

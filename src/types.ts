@@ -46,6 +46,12 @@ export interface IEditorProps {
 
 // ----- SIDEBAR
 
+export interface IProjectFileCategoryHeaderProps {
+    title: string;
+    type: ProjectFileType;
+    PopupStore?: any;
+}
+
 export interface IProjectFileItemProps {
     file: IProjectFile;
     selected: boolean;
@@ -73,4 +79,5 @@ export interface IIconProps {
     name: string;
     size?: number;
     color?: string;
+    onClick?(): void;
 }

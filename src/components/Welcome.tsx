@@ -19,7 +19,7 @@ class NewProjectPopup extends React.Component<any> {
 
     state = {
         filename: `${os.homedir()}\\${this.defaultFilename}`,
-        projectType: 'coffee'
+        projectType: 'js'
     }
 
     handleProjectTypeChange(e: any) {
@@ -56,15 +56,6 @@ class NewProjectPopup extends React.Component<any> {
                     />
                 </div>
                 <div className="new-project-type">
-                    <div className={classnames(this.state.projectType === 'coffee' ? 'active' : null)}>
-                        <input 
-                            type="radio"
-                            value="coffee"
-                            onChange={this.handleProjectTypeChange.bind(this)}
-                            checked={this.state.projectType === 'coffee'}
-                        />
-                        <span>CoffeeScript</span>
-                    </div>
                     <div className={classnames(this.state.projectType === 'js' ? 'active' : null)}>
                         <input 
                             type="radio"
@@ -73,6 +64,15 @@ class NewProjectPopup extends React.Component<any> {
                             checked={this.state.projectType === 'js'}
                         />
                         <span>JavaScript</span>
+                    </div>
+                    <div className={classnames(this.state.projectType === 'coffee' ? 'active' : null)}>
+                        <input 
+                            type="radio"
+                            value="coffee"
+                            onChange={this.handleProjectTypeChange.bind(this)}
+                            checked={this.state.projectType === 'coffee'}
+                        />
+                        <span>CoffeeScript</span>
                     </div>
                 </div>
                 <div className="new-project-actions">
@@ -103,9 +103,10 @@ class RecentProjects extends React.Component<IRecentProjectsProps> {
     render() {
         return (
             <div className="recent-projects">
-                {this.props.ProjectStore.recentProjects.map((p: IRecentProject) => {
+                {this.props.ProjectStore.recentProjects.map((p: IRecentProject, i: number) => {
                     return (
                         <div 
+                            key={i}
                             className="recent-project"
                             onClick={() => {
                                 this.props.ProjectStore.initializeProject(p.path);
@@ -116,9 +117,6 @@ class RecentProjects extends React.Component<IRecentProjectsProps> {
                         </div>
                     );
                 })}
-                <div>
-
-                </div>
             </div>
         );
     }

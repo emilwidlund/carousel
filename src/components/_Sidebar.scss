@@ -23,8 +23,16 @@ $sidebar-padding-horizontal: 20px;
         .views, .components, .generic {
             padding: 10px 0;
 
-            h4 {
+            .file-category-header {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
                 padding: 0 $sidebar-padding-horizontal;
+
+                .icon {
+                    color: #555;
+                }
             }
         }
 
@@ -57,6 +65,29 @@ $sidebar-padding-horizontal: 20px;
             &:hover {
                 background-color: rgba(255, 255, 255, .05);
             }
+        }
+    }
+}
+
+.create-new-file-popup {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    input {
+        margin-top: 20px;
+        width: 200px;
+    }
+
+    .new-file-actions {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        user-select: none;
+        margin-top: 40px;
+
+        .secondary {
+            margin-left: 20px;
         }
     }
 }

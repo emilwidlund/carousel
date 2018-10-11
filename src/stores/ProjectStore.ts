@@ -103,6 +103,8 @@ export class ProjectStore {
 
         walker.on('file', (root: string, fileStats: any, next: Function) => {
 
+            console.log(fileStats.name);
+
             const projectFile: IProjectFile = {
                 name: fileStats.name,
                 shortName: fileStats.name.substring(0, fileStats.name.indexOf('.')),
@@ -158,6 +160,47 @@ export class ProjectStore {
         });
     }
 
+    createNewFile(fileType: ProjectFileType, fileName: string, cb?: Function) {
+        let filePath: string;
+
+        switch(fileType) {
+            case ProjectFileType.View:
+                filePath = `views/${fileName}.view.`;
+                break;
+            case ProjectFileType.Component:
+                filePath = `components/${fileName}.component.`;
+                break;
+            case ProjectFileType.Generic:
+                filePath = `generic/${fileName}.generic.`;
+                break;
+        }
+
+        filePath += this.fileFormat;
+
+        fs.writeFile(path.resolve(this.projectTempPath, filePath), '', (err: Error) => {
+            if (err) return console.error(err);
+
+            const file: IProjectFile = {
+                name: fileName + '.' + this.fileFormat,
+                shortName: fileName,
+                path: path.resolve(this.projectTempPath, filePath),
+                model: null,
+                selected: false,
+                type: fileType
+            };
+
+            if (this.fileFormat === 'js') {
+                file.model = monaco.editor.createModel('', 'javascript');
+            } else if (this.fileFormat === 'coffee') {
+                file.model = monaco.editor.createModel('', 'coffeescript');
+            }
+
+            this.projectFiles.push(file);
+
+            if (cb) cb(path.resolve(this.projectTempPath, filePath));
+        });
+    }
+
     addToRecentProjects(project: IRecentProject) {
         let existingProject = this.recentProjects.find(p => p.path === project.path);
 
@@ -172,7 +215,17 @@ export class ProjectStore {
             this.recentProjects.unshift(project);
         }
 
+        // Make sure that recentProjects exists on disc
+        this.recentProjects = this.recentProjects.filter((p: IRecentProject) => {
+            return fs.existsSync(p.path);
+        });
+
         store.set('recent-projects', this.recentProjects);
+    }
+
+    get fileFormat() {
+        const mainFilePath = this.mainFile.path;
+        return mainFilePath.slice(mainFilePath.lastIndexOf('.') + 1, mainFilePath.length);
     }
 
     get mainFile() {
