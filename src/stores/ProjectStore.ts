@@ -28,7 +28,12 @@ export class ProjectStore {
     @observable projectFiles: IProjectFile[] = [];
 
     constructor() {
-        this.recentProjects = store.get('recent-projects') || [];
+        const projects = store.get('recent-projects') || [];
+    
+        // Make sure that recentProjects exists on disc
+        this.recentProjects = projects.filter((p: IRecentProject) => {
+            return fs.existsSync(p.path);
+        });
     }
 
     createProject(projectType: string, projectPath: string, cb?: Function) {
@@ -214,11 +219,6 @@ export class ProjectStore {
         } else {
             this.recentProjects.unshift(project);
         }
-
-        // Make sure that recentProjects exists on disc
-        this.recentProjects = this.recentProjects.filter((p: IRecentProject) => {
-            return fs.existsSync(p.path);
-        });
 
         store.set('recent-projects', this.recentProjects);
     }
