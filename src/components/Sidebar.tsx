@@ -81,13 +81,13 @@ class ProjectFileCategoryHeader extends React.Component<IProjectFileCategoryHead
         return (
             <div
                 className="file-category-header"
-                onClick={() => {
-                    this.props.PopupStore.displayPopup(<CreateFilePopup type={this.props.type} />);
-                }}
             >
                 <h4>{this.props.title}</h4>
                 <Icon 
                     name="add"
+                    onClick={() => {
+                        this.props.PopupStore.displayPopup(<CreateFilePopup type={this.props.type} />);
+                    }}
                 />
             </div>
         );
