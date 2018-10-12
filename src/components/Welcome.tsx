@@ -5,10 +5,13 @@ import classnames from 'classnames';
 import {remote} from 'electron';
 const dialog = remote.dialog;
 const os = remote.require('os');
+const shell = remote.shell;
 
 import Button from './Button';
 import Icon from './Icon';
 import {IRecentProjectsProps, IRecentProject} from '../types';
+
+const version = require('../../package.json').version;
 
 
 @inject('ProjectStore', 'PopupStore')
@@ -145,33 +148,43 @@ export default class Welcome extends React.Component<any> {
         });
     }
 
+    openLink(url: string) {
+        shell.openExternal(url);
+    }
+
     render() {
         return (
             <div id="welcome">
                 <div className="welcome-info">
-                    <h1>Welcome to Carousel</h1>
-                    <p>Version 1.1.6.2</p>
-                    <div className="welcome-actions">
-                        <div 
-                            className="action new-project"
-                            onClick={this.handleNewProject.bind(this)}
-                        >
-                            <Icon 
-                                name="add" 
-                                size={48}
-                            />
-                            <h3>New Project</h3>
+                    <div className="welcome-info-content">
+                        <h1>Welcome to Carousel</h1>
+                        <p>Version {version}</p>
+                        <div className="welcome-actions">
+                            <div 
+                                className="action new-project"
+                                onClick={this.handleNewProject.bind(this)}
+                            >
+                                <Icon 
+                                    name="add" 
+                                    size={48}
+                                />
+                                <h3>New Project</h3>
+                            </div>
+                            <div 
+                                className="action open-project"
+                                onClick={this.handleOpenProject.bind(this)}
+                            >
+                                <Icon 
+                                    name="folder" 
+                                    size={48}
+                                />
+                                <h3>Open Project</h3>
+                            </div>
                         </div>
-                        <div 
-                            className="action open-project"
-                            onClick={this.handleOpenProject.bind(this)}
-                        >
-                            <Icon 
-                                name="folder" 
-                                size={48}
-                            />
-                            <h3>Open Project</h3>
-                        </div>
+                    </div>
+                    <div className="welcome-meta">
+                        <h4 onClick={() => this.openLink('https://twitter.com/emilwidlund')}>Built by Emil Widlund</h4>
+                        <p onClick={() => this.openLink('https://github.com/koenbok/Framer')}>Powered by Framer Library</p>
                     </div>
                 </div>
                 <RecentProjects />

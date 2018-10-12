@@ -5,7 +5,6 @@ import {remote, ipcRenderer} from 'electron';
 const fs = remote.require('fs');
 const walk = remote.require('walk');
 const path = remote.require('path');
-const zip = remote.require('node-zip')();
 const archiver = remote.require('archiver');
 const unzip = remote.require('unzip-stream');
 const temp = remote.require('temp');

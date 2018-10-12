@@ -1,6 +1,6 @@
 {
   "name": "carousel",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "description": "",
   "main": "main.js",
   "scripts": {
@@ -36,13 +36,11 @@
     "coffeescript": "^2.3.2",
     "css-loader": "^1.0.0",
     "electron-store": "^2.0.0",
-    "gsap": "^2.0.2",
     "mobx": "^5.5.0",
     "mobx-react": "^5.2.8",
     "monaco-editor": "^0.14.3",
     "monaco-editor-webpack-plugin": "^1.5.4",
     "node-sass": "^4.9.3",
-    "node-zip": "^1.1.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "sass-loader": "^7.1.0",
@@ -58,8 +56,7 @@
   "devDependencies": {
     "awesome-typescript-loader": "^5.2.1",
     "electron": "^3.0.2",
-    "electron-packager": "^12.2.0",
-    "electron-rebuild": "^1.8.2",
+    "electron-builder": "^20.28.4",
     "source-map-loader": "^0.2.4",
     "typescript": "^3.1.1"
   }
