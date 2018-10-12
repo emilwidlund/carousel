@@ -100,8 +100,8 @@ export class ProjectStore {
         });
     }
 
-    traverseFiles(path: string, cb?: Function) {
-        const walker = walk.walk(path);
+    traverseFiles(p: string, cb?: Function) {
+        const walker = walk.walk(p);
 
         const files: IProjectFile[] = [];
 
@@ -110,7 +110,7 @@ export class ProjectStore {
             const projectFile: IProjectFile = {
                 name: fileStats.name,
                 shortName: fileStats.name.substring(0, fileStats.name.indexOf('.')),
-                path: `${root}/${fileStats.name}`,
+                path: path.resolve(root, fileStats.name),
                 model: null,
                 selected: false,
                 type: ProjectFileType.Generic
