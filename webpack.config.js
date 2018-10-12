@@ -45,5 +45,11 @@ module.exports = {
             }
         ]
     },
-    plugins: [new webpack.HotModuleReplacementPlugin, new MonacoWebpackPlugin()]
+    plugins: [
+        new webpack.optimize.LimitChunkCountPlugin({
+            maxChunks: 1
+        }),
+        new webpack.HotModuleReplacementPlugin, 
+        new MonacoWebpackPlugin()
+    ]
 }
