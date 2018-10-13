@@ -6,12 +6,26 @@
   "scripts": {
     "start": "electron .",
     "watch": "./node_modules/.bin/webpack-dev-server",
-    "electron-rebuild": "./node_modules/.bin/electron-rebuild"
+    "build": "electron-builder"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/emilwidlund/carousel.git"
   },
+  "build": {
+    "appId": "com.carousel.framer",
+    "mac": {
+      "category": "public.app-category.graphics-design"
+    },
+    "directories": {
+      "output": "../carousel-build"
+    }
+  },
+  "files": [
+    "*.js",
+    "dist",
+    "node_modules"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",

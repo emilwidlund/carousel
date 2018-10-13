@@ -17,9 +17,9 @@ app.on('ready', () => {
         height: 800
     });
 
-    mainWindow.loadURL('http://localhost:8000');
+    mainWindow.loadFile('./dist/index.html');
 
-    // mainWindow.openDevTools();
+    mainWindow.openDevTools();
 
     mainWindow.on('closed', () => {
         mainWindow = null;
@@ -39,7 +39,7 @@ ipcMain.on('start-preview', (event, arg) => {
     
         previewWindow.loadURL('http://localhost:8010');
     
-        // previewWindow.openDevTools();
+        previewWindow.openDevTools();
     
         previewWindow.on('closed', () => {
             previewWindow = null;
