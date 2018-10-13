@@ -1,6 +1,6 @@
 {
     "compilerOptions": {
-        "outDir": "./dist/",
+        "outDir": "./dist",
         "sourceMap": true,
         "noImplicitAny": true,
         "module": "commonjs",
@@ -8,6 +8,7 @@
         "lib": ["es2015", "dom"],
         "jsx": "react",
         "declaration": true,
+        "declarationDir": "./dist/types",
         "experimentalDecorators": true
     },
     "include": [

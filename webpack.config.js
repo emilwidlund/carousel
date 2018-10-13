@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
+const path = require('path');
 
 module.exports = {
     entry: {
@@ -7,7 +8,6 @@ module.exports = {
     },
     output: {
         filename: 'bundle.js',
-        path: __dirname + '/dist',
     },
     mode: 'development',
     devtool: 'source-map',
