@@ -1,1 +1,0 @@
-import HomeView from './views/Home.view';

@@ -36,8 +36,11 @@ export class ProjectStore {
     }
 
     createProject(projectType: string, projectPath: string, cb?: Function) {
-        const projectTemplate: string = projectType === 'coffee' ? './src/templates/project-coffeescript' : './src/templates/project-javascript';
-        const modulesTemplate: string = './src/templates/modules';
+        const projectTemplate: string = projectType === 'coffee' ? 
+            path.join(remote.app.getAppPath(), './dist/templates/project-coffeescript') : 
+            path.join(remote.app.getAppPath(), './dist/templates/project-javascript');
+
+        const modulesTemplate: string = path.join(remote.app.getAppPath(), './dist/templates/modules');
 
         const output = fs.createWriteStream(projectPath);
         const archive = archiver('zip');
@@ -56,6 +59,7 @@ export class ProjectStore {
 
     initializeProject(projectPath: string) {
         projectPath = path.resolve(projectPath);
+        console.log(projectPath);
 
         if (!projectPath.endsWith('.crsl')) return;
 
