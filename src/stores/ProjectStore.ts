@@ -59,7 +59,6 @@ export class ProjectStore {
 
     initializeProject(projectPath: string) {
         projectPath = path.resolve(projectPath);
-        console.log(projectPath);
 
         if (!projectPath.endsWith('.crsl')) return;
 
