@@ -18,8 +18,6 @@ app.on('ready', () => {
         height: 800
     });
 
-    mainWindow.openDevTools();
-
     mainWindow.loadFile('./dist/index.html');
 
     if (!app.isPackaged) {
@@ -45,8 +43,6 @@ ipcMain.on('start-preview', (event, arg) => {
             experimentalFeatures: true,
             autoHideMenuBar: true
         });
-
-        previewWindow.openDevTools();
     
         previewWindow.loadURL('http://localhost:8010');
 
