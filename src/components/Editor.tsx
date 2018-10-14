@@ -36,7 +36,7 @@ export default class Editor extends React.Component<IEditorProps, {}> {
         return (
             <div className="editor-meta">
                 <h2>{this.props.EditorStore.selectedFile.shortName}</h2>
-                <span>{this.props.EditorStore.selectedFile.path}</span>
+                <span>{this.props.EditorStore.selectedFile.name}</span>
             </div>
         );
     }

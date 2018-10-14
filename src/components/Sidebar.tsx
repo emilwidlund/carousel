@@ -2,7 +2,8 @@ import * as React from 'react';
 import * as classnames from 'classnames';
 import {inject, observer} from 'mobx-react';
 
-import {remote} from 'electron';
+import {remote, ipcRenderer} from 'electron';
+const shell = remote.shell;
 
 import Icon from './Icon';
 import Button from './Button';
@@ -145,22 +146,24 @@ class ProjectFileItem extends React.Component<IProjectFileItemProps> {
 @observer
 export default class Sidebar extends React.Component<ISidebarProps> {
     componentDidMount() {
-        window.onbeforeunload = (e) => {
-            e.returnValue = false;
-            remote.dialog.showMessageBox({
-                type: 'warning',
-                buttons: ['Save', 'Don\'t Save', 'Cancel'],
-                message: 'Your project has not been saved. How do you want to proceed?',
-                noLink: true
-            }, (response: number) => {
-                if (response === 0) {
-                    this.props.ProjectStore.saveProject(() => {
+        if (remote.app.isPackaged) {
+            window.onbeforeunload = (e) => {
+                e.returnValue = false;
+                remote.dialog.showMessageBox({
+                    type: 'warning',
+                    buttons: ['Save', 'Don\'t Save', 'Cancel'],
+                    message: 'Your project has not been saved. How do you want to proceed?',
+                    noLink: true
+                }, (response: number) => {
+                    if (response === 0) {
+                        this.props.ProjectStore.saveProject(() => {
+                            remote.getCurrentWindow().destroy();
+                        });
+                    } else if (response === 1) {
                         remote.getCurrentWindow().destroy();
-                    });
-                } else if (response === 1) {
-                    remote.getCurrentWindow().destroy();
-                }
-            });
+                    }
+                });
+            }
         }
     }
 
@@ -168,8 +171,23 @@ export default class Sidebar extends React.Component<ISidebarProps> {
         return (
             <div id="sidebar">
                 <div className="sidebar-header">
-                    <h3>{this.props.ProjectStore.projectName}</h3>
-                    <p>This is an example project</p>
+                    <h2>{this.props.ProjectStore.projectName}</h2>
+                    <div className="project-actions">
+                        <Icon
+                            name="folder"
+                            size={20}
+                            onClick={() => {
+                                shell.openItem(this.props.ProjectStore.projectTempPath);
+                            }}
+                        />
+                        <Icon
+                            name="tab"
+                            size={20}
+                            onClick={() => {
+                                ipcRenderer.send('start-preview', this.props.ProjectStore.projectTempPath);
+                            }}
+                        />
+                    </div>
                 </div>
                 <div className="sidebar-navigator">
                     <div className="main">

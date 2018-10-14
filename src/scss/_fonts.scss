@@ -23,6 +23,7 @@ h4 {
 }
 
 .material-icon {
+    position: relative;
     font-family: 'Material Icons';
     font-weight: normal;
     font-style: normal;
@@ -45,4 +46,31 @@ h4 {
   
     /* Support for IE. */
     font-feature-settings: 'liga';
+
+    &.action {
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 150%;
+            height: 150%;
+            border-radius: 75%;
+            background-color: rgba(255, 255, 255, .1);
+            transform: scale(.8) translate(-50%, -50%);
+            opacity: 0;
+
+            -webkit-transition: all .1s ease-in-out;
+        }
+
+        &:hover {
+            color: #fff !important;
+
+            &:before {
+                transform: scale(1) translate(-50%, -50%);
+                opacity: 1;
+            }
+        }
+    }
 }

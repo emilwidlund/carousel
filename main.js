@@ -3,6 +3,7 @@ const {app, ipcMain, BrowserWindow} = require('electron');
 const server = require('./server');
 
 let mainWindow;
+let projectServerRunning;
 
 app.on('window-all-closed', () => {
     if (process.platform != 'darwin') {
@@ -31,7 +32,11 @@ app.on('ready', () => {
 });
 
 ipcMain.on('start-preview', (event, arg) => {
+    if (projectServerRunning) return;
+
     server.start(arg, () => {
+        projectServerRunning = true;
+
         let previewWindow = new BrowserWindow({
             title: 'Preview',
             width: 1360,
@@ -51,10 +56,12 @@ ipcMain.on('start-preview', (event, arg) => {
     
         previewWindow.on('closed', () => {
             previewWindow = null;
+            projectServerRunning = false;
             server.close();
         });
 
         mainWindow.on('closed', () => {
+            projectServerRunning = false;
             server.close();
         });
     });

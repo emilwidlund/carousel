@@ -13,6 +13,28 @@ $sidebar-padding-horizontal: 20px;
 
     .sidebar-header {
         padding: 40px $sidebar-padding-horizontal;
+
+        h2 {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            width: 100%;
+            margin-top: 0;
+        }
+
+        .project-actions {
+            display: flex;
+            flex-direction: row;
+            margin-top: 10px;
+
+            > .icon {
+                margin-left: 20px;
+
+                &:first-child {
+                    margin-left: 0;
+                }
+            }
+        }
     }
 
     .sidebar-navigator {
