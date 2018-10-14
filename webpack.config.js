@@ -9,7 +9,7 @@ module.exports = {
     output: {
         filename: 'bundle.js',
     },
-    mode: 'production',
+    mode: 'development',
     devtool: 'source-map',
     target: 'electron-renderer',
     resolve: {
