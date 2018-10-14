@@ -21,7 +21,14 @@
     },
     "directories": {
       "output": "build"
-    }
+    },
+    "fileAssociations": [
+      {
+        "ext": ["crsl"],
+        "name": "Carousel",
+        "description": "Carousel Project File"
+      }
+    ]
   },
   "files": [
     "*.js",

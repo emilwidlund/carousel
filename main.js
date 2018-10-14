@@ -17,9 +17,13 @@ app.on('ready', () => {
         height: 800
     });
 
+    mainWindow.openDevTools();
+
     mainWindow.loadFile('./dist/index.html');
 
-    mainWindow.openDevTools();
+    if (!app.isPackaged) {
+        mainWindow.openDevTools();
+    }    
 
     mainWindow.on('closed', () => {
         mainWindow = null;
@@ -36,10 +40,14 @@ ipcMain.on('start-preview', (event, arg) => {
             experimentalFeatures: true,
             autoHideMenuBar: true
         });
+
+        previewWindow.openDevTools();
     
         previewWindow.loadURL('http://localhost:8010');
-    
-        previewWindow.openDevTools();
+
+        if (!app.isPackaged) {
+            previewWindow.openDevTools();
+        }
     
         previewWindow.on('closed', () => {
             previewWindow = null;

@@ -1,6 +1,7 @@
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const path = require('path');
+const babelLoader = require('babel-loader');
 
 const PORT = 8010;
 
@@ -11,7 +12,7 @@ module.exports = {
 
         const config = {
             entry: {
-                app: ['webpack/hot/dev-server', `${servePath}/app.js`]
+                app: [path.resolve(__dirname, 'node_modules/webpack/hot/dev-server'), `${servePath}/app.js`]
             },
             resolve: {
                 extensions: ['.js', '.coffee']
@@ -26,19 +27,19 @@ module.exports = {
                 rules: [
                     {
                         test: /\.js$/,
-                        loader: 'babel-loader',
+                        loader: path.resolve(__dirname, 'node_modules/babel-loader'),
                         options: {
                             babelrc: false,
-                            presets: ['@babel/preset-env'],
+                            presets: [path.resolve(__dirname, 'node_modules/@babel/preset-env')],
                             plugins: [
-                                ['@babel/plugin-proposal-decorators', {legacy: true}],
-                                '@babel/plugin-proposal-class-properties'
+                                [path.resolve(__dirname, 'node_modules/@babel/plugin-proposal-decorators'), {legacy: true}],
+                                path.resolve(__dirname, 'node_modules/@babel/plugin-proposal-class-properties')
                             ]
                         }
                     },
                     {
                         test: /\.coffee$/,
-                        use: ['coffee-loader']
+                        use: [path.resolve(__dirname, 'node_modules/coffee-loader')]
                     }
                 ]
             },

@@ -22,11 +22,13 @@ monaco.editor.defineTheme('syntax', framerTheme);
 @observer
 class App extends React.Component {
 
-    componentDidMount() {
-        if (remote.process.argv.length >= 2) {
-            const filePath = remote.process.argv[1];
-            if (filePath) {
-                // stores.ProjectStore.initializeProject(filePath);
+    componentDidMount() {        
+        if (remote.app.isPackaged) {
+            if (remote.process.argv.length >= 2) {
+                const filePath = remote.process.argv[1];
+                if (filePath) {
+                    stores.ProjectStore.initializeProject(filePath);
+                }
             }
         }
     }
