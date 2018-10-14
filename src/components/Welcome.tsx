@@ -157,6 +157,7 @@ export default class Welcome extends React.Component<any> {
             <div id="welcome">
                 <div className="welcome-info">
                     <div className="welcome-info-content">
+                        <img src="img/logo_inv.svg" />
                         <h1>Welcome to Carousel</h1>
                         <p>Version {version}</p>
                         <div className="welcome-actions">

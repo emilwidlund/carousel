@@ -41,7 +41,8 @@ ipcMain.on('start-preview', (event, arg) => {
             height: 800,
             parent: mainWindow,
             experimentalFeatures: true,
-            autoHideMenuBar: true
+            autoHideMenuBar: true,
+            icon: path.join(__dirname, 'dist/icons/png/64x64.png')
         });
     
         previewWindow.loadURL('http://localhost:8010');
