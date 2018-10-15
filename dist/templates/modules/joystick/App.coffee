@@ -18,7 +18,7 @@ Device.customize
     devicePixelRatio: 1
     deviceZoom: 1
 
-Device.screenBackground.visible = null
+Device.screenBackground.visible = false
 
 # Disable Hints
 Framer.Extras.Hints.disable()
