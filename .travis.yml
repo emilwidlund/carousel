@@ -20,7 +20,7 @@ cache:
 
 script: 
   - yarn bundle
-  - yarn build -m -w -l
+  - yarn build -m -w
 
 before_cache:
   - rm -rf $HOME/.cache/electron-builder/wine
