@@ -6,9 +6,8 @@ Carousel is a prototyping tool powered by Framer Library. It aims to provide a s
 
 Carousel does not feature a Design-mode, which means that your prototypes are made only using the Framer Library API. Projects may be written in JavaScript (ES6) or CoffeeScript.
 
-All projects comes pre-packaged with a few handy Framer Modules:
-- Framer Joystick
-- Framer Form
+### Download
+You can find download-links for the latest release [here](https://github.com/emilwidlund/carousel/releases/latest). If you'd like to see all releases, you can find them [here](https://github.com/emilwidlund/carousel/releases).
 
 ### Important Notice
 Code Signing Certificates have not yet been integrated with the builds for neither Windows or macOS. This means that both Windows and macOS (and probably a couple of anti-virus programs) will flag the Carousel installer as untrusted. Carousel will however run fine if you proceed despite the warnings.
