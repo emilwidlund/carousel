@@ -8,10 +8,6 @@ _ = Framer._
 Utils.isFramerStudio = () -> true
 
 Device = new DeviceComponent
-    fullScreen: false
-    padding: 0
-    contentScale: 1
-    deviceScale: 'fit'
     hideBezel: true
 
 Device.setupContext()
@@ -20,6 +16,9 @@ Device.customize
     screenWidth: 1920
     screenHeight: 1080
     devicePixelRatio: 1
+    deviceZoom: 1
+
+Device.screenBackground.visible = null
 
 # Disable Hints
 Framer.Extras.Hints.disable()
