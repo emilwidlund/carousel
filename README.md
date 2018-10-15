@@ -14,3 +14,11 @@ Download the .dmg file for macOS or the .exe file for Windows.
 Code Signing Certificates have not yet been integrated with the builds for neither Windows or macOS. This means that both Windows and macOS (and probably a couple of anti-virus programs) will flag the Carousel installer as untrusted. Carousel will however run fine if you proceed despite the warnings.
 
 This is of course on our radar, and we'll hopefully have certificates integrated with builds on both platforms soon.
+
+### Issues
+If you find any issue or bug, please let us know by [submitting an issue](https://github.com/emilwidlund/carousel). Or why not - try fixing it yourself and [open a pull request](https://github.com/emilwidlund/carousel/pulls) :)  
+
+If you have ideas of improvement and feature-requests, open an issue and add the "enhancement"-label.
+
+### Contact
+For any questions, highfives or concerns, please contact me on [Twitter](https://twitter.com/emilwidlund).
