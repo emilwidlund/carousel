@@ -7,7 +7,7 @@ _ = Framer._
 
 Utils.isFramerStudio = () -> true
 
-window.fdevice = Device = new DeviceComponent
+Device = new DeviceComponent
     fullScreen: false
     padding: 0
     contentScale: 1
