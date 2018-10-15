@@ -80,16 +80,12 @@ ipcMain.on('start-preview', (event, arg) => {
         previewWindow.on('closed', () => {
             previewWindow = null;
             projectServerRunning = false;
-            server.close(() => {
-                console.log('Preview window close');
-            });
+            server.close();
         });
 
         mainWindow.on('closed', () => {
             projectServerRunning = false;
-            server.close(() => {
-                console.log('Main window close');
-            });
+            server.close();
         });
     });
 });
