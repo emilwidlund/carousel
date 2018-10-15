@@ -11,6 +11,6 @@ All projects comes pre-packaged with a few handy Framer Modules:
 - Framer Form
 
 ### Important Notice
-Code Signing Certificates have not yet been integrated with the builds for neither Windows or macOS. This means that both Windows and macOS (and probably a couple of anti-virus programs) will flag the Carousel installer as untrusted. Carousel will however run fine if you proceed as intended.
+Code Signing Certificates have not yet been integrated with the builds for neither Windows or macOS. This means that both Windows and macOS (and probably a couple of anti-virus programs) will flag the Carousel installer as untrusted. Carousel will however run fine if you proceed despite the warnings.
 
 This is of course on our radar, and we'll hopefully have certificates integrated with builds on both platforms soon.
