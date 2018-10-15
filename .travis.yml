@@ -12,9 +12,6 @@ matrix:
           - node_modules
           - $HOME/.cache/electron
           - $HOME/.cache/electron-builder
-      script: 
-        - yarn bundle
-        - yarn build -m -w
       before_cache:
         - rm -rf $HOME/.cache/electron-builder/wine
 
