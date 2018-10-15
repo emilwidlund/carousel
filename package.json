@@ -1,5 +1,6 @@
 {
   "name": "carousel",
+  "productName": "Carousel",
   "version": "0.0.1",
   "description": "",
   "main": "main.js",
@@ -16,8 +17,12 @@
   },
   "build": {
     "appId": "com.carousel.framer",
+    "win": {
+      "icon": "dist/icons/win/icon.png"
+    },
     "mac": {
-      "category": "public.app-category.graphics-design"
+      "category": "public.app-category.graphics-design",
+      "icon": "dist/icons/mac/icon.png"
     },
     "directories": {
       "output": "build"
@@ -36,7 +41,7 @@
     "node_modules"
   ],
   "keywords": [],
-  "author": "",
+  "author": "Emil Widlund",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/emilwidlund/carousel/issues"
