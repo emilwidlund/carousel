@@ -18,7 +18,7 @@ module.exports = {
                 extensions: ['.js', '.coffee']
             },
             mode: 'development',
-            target: 'electron-renderer',
+            target: 'web',
             output: {
                 path: servePath,
                 filename: 'bundle.js'
