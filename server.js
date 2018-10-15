@@ -61,8 +61,8 @@ module.exports = {
            if (cb) cb();
         });
     },
-    close: () => {
-        return server.close();
+    close: (cb) => {
+        server.close(cb);
     }
 }
 

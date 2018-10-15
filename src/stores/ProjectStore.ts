@@ -7,7 +7,7 @@ const walk = remote.require('walk');
 const path = remote.require('path');
 const archiver = remote.require('archiver');
 const unzip = remote.require('unzip-stream');
-const temp = remote.require('temp');
+const temp = remote.require('temp').track();
 const Store = remote.require('electron-store');
 
 import EditorStore from './EditorStore';

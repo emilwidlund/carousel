@@ -146,25 +146,12 @@ class ProjectFileItem extends React.Component<IProjectFileItemProps> {
 @observer
 export default class Sidebar extends React.Component<ISidebarProps> {
     componentDidMount() {
-        if (remote.app.isPackaged) {
-            window.onbeforeunload = (e) => {
-                e.returnValue = false;
-                remote.dialog.showMessageBox({
-                    type: 'warning',
-                    buttons: ['Save', 'Don\'t Save', 'Cancel'],
-                    message: 'Your project has not been saved. How do you want to proceed?',
-                    noLink: true
-                }, (response: number) => {
-                    if (response === 0) {
-                        this.props.ProjectStore.saveProject(() => {
-                            remote.getCurrentWindow().destroy();
-                        });
-                    } else if (response === 1) {
-                        remote.getCurrentWindow().destroy();
-                    }
-                });
-            }
-        }
+
+        ipcRenderer.on('save-project', () => {
+            this.props.ProjectStore.saveProject(() => {
+                remote.getCurrentWindow().destroy();
+            });
+        });
     }
 
     render() {
