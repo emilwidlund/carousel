@@ -7,23 +7,16 @@ matrix:
       env:
         - ELECTRON_CACHE=$HOME/.cache/electron
         - ELECTRON_BUILDER_CACHE=$HOME/.cache/electron-builder
-
-    - os: linux
-      services: docker
-      language: generic
-
-cache:
-  directories:
-    - node_modules
-    - $HOME/.cache/electron
-    - $HOME/.cache/electron-builder
-
-script: 
-  - yarn bundle
-  - yarn build -m -w
-
-before_cache:
-  - rm -rf $HOME/.cache/electron-builder/wine
+      cache:
+        directories:
+          - node_modules
+          - $HOME/.cache/electron
+          - $HOME/.cache/electron-builder
+      script: 
+        - yarn bundle
+        - yarn build -m -w
+      before_cache:
+        - rm -rf $HOME/.cache/electron-builder/wine
 
 branches:
   except:
