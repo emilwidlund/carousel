@@ -19,4 +19,4 @@ This is of course on our radar, and we'll hopefully have certificates integrated
 If you find an issue or a bug, please let us know by [submitting an issue](https://github.com/emilwidlund/carousel/issues). You could also [open a pull request](https://github.com/emilwidlund/carousel/pulls). If you have ideas of improvement and feature-requests, open an issue and add the "enhancement"-label.
 
 ### Contact
-For any questions, highfives or concerns, please contact me on [Twitter](https://twitter.com/emilwidlund).
+For any questions, highfives or concerns - contact me on [Twitter](https://twitter.com/emilwidlund).
