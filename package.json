@@ -9,7 +9,7 @@
     "server": "./node_modules/.bin/webpack-dev-server",
     "watch": "webpack --watch",
     "bundle": "webpack",
-    "build": "electron-builder -mwl"
+    "build": "electron-builder"
   },
   "repository": {
     "type": "git",

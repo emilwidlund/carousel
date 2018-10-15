@@ -18,7 +18,7 @@ cache:
     - $HOME/.cache/electron
     - $HOME/.cache/electron-builder
 
-script: yarn bundle && yarn build
+script: yarn bundle && yarn build --mwl
 
 before_cache:
   - rm -rf $HOME/.cache/electron-builder/wine
