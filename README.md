@@ -16,7 +16,7 @@ Code Signing Certificates have not yet been integrated with the builds for neith
 This is of course on our radar, and we'll hopefully have certificates integrated with builds on both platforms soon.
 
 ### Issues
-If you find an issue or a bug, please let us know by [submitting an issue](https://github.com/emilwidlund/carousel/issues). But you can also [open a pull request](https://github.com/emilwidlund/carousel/pulls). If you have ideas of improvement and feature-requests, open an issue and add the "enhancement"-label.
+If you find an issue or a bug, please let us know by [submitting an issue](https://github.com/emilwidlund/carousel/issues). You could also [open a pull request](https://github.com/emilwidlund/carousel/pulls). If you have ideas of improvement and feature-requests, open an issue and add the "enhancement"-label.
 
 ### Contact
 For any questions, highfives or concerns, please contact me on [Twitter](https://twitter.com/emilwidlund).
