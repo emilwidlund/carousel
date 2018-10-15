@@ -1,4 +1,5 @@
 const {app, ipcMain, BrowserWindow} = require('electron');
+const path = require('path');
 
 const server = require('./server');
 
@@ -15,7 +16,8 @@ app.on('ready', () => {
     mainWindow = new BrowserWindow({
         title: 'Carousel',
         width: 1360,
-        height: 800
+        height: 800,
+        icon: path.join(__dirname, 'dist/icons/png/64x64.png')
     });
 
     mainWindow.loadFile('./dist/index.html');
