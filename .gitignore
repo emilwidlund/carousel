@@ -1,5 +1,11 @@
 /node_modules/
 /build/
 
+/dist/*.js
 /dist/**.js
+
+/dist/*.js.map
+/dist/**.js.map
+
+/dist/*.json
 /dist/**.json
