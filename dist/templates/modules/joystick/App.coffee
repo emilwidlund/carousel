@@ -1,12 +1,25 @@
 {FocusSystem} = require './FocusSystem.coffee'
 {Focusable} = require './Focusable.coffee'
 {Background} = require './Background.coffee'
-{Device} = require './Device.coffee'
 {viewStore} = require './stores/ViewStore.coffee'
 {actionStore} = require './stores/ActionStore.coffee'
 _ = Framer._
 
-# new Device(1920, 1080)
+Utils.isFramerStudio = () -> true
+
+window.fdevice = Device = new DeviceComponent
+    fullScreen: false
+    padding: 0
+    contentScale: 1
+    deviceScale: 'fit'
+    hideBezel: true
+
+Device.setupContext()
+
+Device.customize
+    screenWidth: 1920
+    screenHeight: 1080
+    devicePixelRatio: 1
 
 # Disable Hints
 Framer.Extras.Hints.disable()

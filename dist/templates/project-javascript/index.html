@@ -6,7 +6,17 @@
 		<meta name="apple-mobile-web-app-capable" content="yes">
 		<meta name="apple-mobile-web-app-status-bar-style" content="black">
 		<meta name="format-detection" content="telephone=no">
-		<meta name="viewport" content="width=640,initial-scale=0.5,user-scalable=no">
+		
+		<script type="text/javascript">
+			// This automatically sets the right viewport scale on mobile devices
+			(function () {
+				var scale = 1 / window.devicePixelRatio
+				var viewport = "width=device-width, height=device-height, initial-scale=" + scale + ", maximum-scale=" + scale + ", user-scalable=no, viewport-fit=cover"
+				var iOS = /iPad|iPhone|iPod/.test(navigator.platform)
+				if (iOS) { viewport += ", shrink-to-fit=no" }
+				document.write("<meta name=\"viewport\" content=\"" + viewport + "\">")
+			})()
+		</script>
 
 		<link rel="apple-touch-icon-precomposed" sizes="144x144" href="icon/apple-touch-icon-144x144-precomposed.png">
 		<link rel="apple-touch-icon-precomposed" sizes="114x114" href="icon/apple-touch-icon-114x114-precomposed.png">
