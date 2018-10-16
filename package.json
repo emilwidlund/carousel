@@ -30,7 +30,9 @@
     },
     "fileAssociations": [
       {
-        "ext": ["crsl"],
+        "ext": [
+          "crsl"
+        ],
         "name": "Carousel",
         "description": "Carousel Project File"
       }
@@ -75,8 +77,10 @@
     "sass-loader": "^7.1.0",
     "style-loader": "^0.23.0",
     "temp": "^0.8.3",
+    "universal-analytics": "^0.4.17",
     "unzip": "^0.1.11",
     "unzip-stream": "^0.3.0",
+    "uuid": "^3.3.2",
     "walk": "^2.3.14",
     "webpack": "^4.20.2",
     "webpack-cli": "^3.1.1",
