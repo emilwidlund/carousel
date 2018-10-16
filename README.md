@@ -6,6 +6,8 @@
 
 Carousel is a prototyping tool powered by [Framer Library](https://github.com/koenbok/Framer). It provides a simple way to build large-scale, Gamepad-driven prototypes on both macOS and Windows. Prototypes are built using the [Framer Library API](https://classic.framer.com/docs) and may be written in JavaScript (ES6) or CoffeeScript.
 
+New Carousel-projects comes pre-loaded with [Framer Joystick](https://blog.framer.com/introducing-framer-joystick-28359287bef0) and simple boilerplate code which makes it very easy to get up and running without having to setup anything.
+
 ### Download
 You can find download-links for the latest release [here](https://github.com/emilwidlund/carousel/releases/latest). If you'd like to see all releases, you can find them [here](https://github.com/emilwidlund/carousel/releases).  
 Download the .dmg file for macOS or the .exe file for Windows.
