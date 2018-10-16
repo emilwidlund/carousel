@@ -3,8 +3,9 @@ import {inject, observer} from 'mobx-react';
 import classnames from 'classnames';
 import {remote} from 'electron';
 const dialog = remote.dialog;
-const os = remote.require('os');
 const shell = remote.shell;
+const os = remote.require('os');
+const path = remote.require('path');
 
 import Button from './Button';
 import Icon from './Icon';
@@ -20,7 +21,7 @@ class NewProjectPopup extends React.Component<any> {
     defaultFilename: string = 'Untitled.crsl';
 
     state = {
-        filename: `${os.homedir()}\\${this.defaultFilename}`,
+        filename: path.resolve(os.homedir(), 'Documents', this.defaultFilename),
         projectType: 'js'
     }
 
