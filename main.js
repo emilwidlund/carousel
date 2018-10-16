@@ -105,6 +105,7 @@ ipcMain.on('start-preview', (event, arg) => {
             projectServerRunning = false;
             server.close();
             trackEvent('Project Server', 'Closed', 'Main Window');
+            trackEvent('Window', 'Inheritly Closed', 'Preview Window');
         });
     });
 });
