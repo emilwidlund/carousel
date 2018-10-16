@@ -1,5 +1,4 @@
 import {observable} from 'mobx';
-import * as monaco from 'monaco-editor';
 
 import ProjectStore from './ProjectStore';
 import {IProjectFile} from '../types';

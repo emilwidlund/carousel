@@ -1,6 +1,5 @@
 const {app, ipcMain, dialog, BrowserWindow} = require('electron');
 const path = require('path');
-const temp = require('temp');
 
 const server = require('./server');
 
@@ -12,7 +11,7 @@ app.on('window-all-closed', () => {
     if (process.platform != 'darwin') {
         app.quit();
     }
-})
+});
 
 app.on('ready', () => {
     mainWindow = new BrowserWindow({

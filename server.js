@@ -1,7 +1,7 @@
 const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const path = require('path');
-const babelLoader = require('babel-loader');
+require('babel-loader');
 
 const PORT = 8010;
 

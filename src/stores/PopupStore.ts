@@ -1,4 +1,3 @@
-import * as React from 'react';
 import {observable} from 'mobx';
 
 export class PopupStore {

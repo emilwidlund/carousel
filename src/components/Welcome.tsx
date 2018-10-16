@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { observable } from 'mobx';
 import {inject, observer} from 'mobx-react';
 import classnames from 'classnames';
 import {remote} from 'electron';
