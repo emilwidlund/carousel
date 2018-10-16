@@ -93,14 +93,14 @@ $sidebar-padding-horizontal: 20px;
 
         &.active {
             color: #fff;
-            background-color: $color-accent;
+            background-color: rgba(255, 255, 255, .05);
 
             .icon {
                 color: #fff;
             }
 
             &:hover {
-                background-color: $color-accent;
+                background-color: rgba(255, 255, 255, .05);
             }
         }
 
