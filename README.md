@@ -13,7 +13,7 @@ You can find download-links for the latest release [here](https://github.com/emi
 Download the .dmg file for macOS or the .exe file for Windows.
 
 #### Important Notice
-Code Signing Certificates have not yet been integrated with the builds for neither Windows or macOS. This means that both Windows and macOS (and probably a couple of anti-virus programs) will flag the Carousel installer as untrusted. Carousel will however run fine if you proceed despite the warnings.
+Code Signing Certificates has not yet been integrated with the builds for neither Windows or macOS. This means that both Windows and macOS (and probably a couple of anti-virus programs) will flag the Carousel installer as untrusted. Carousel will however run fine if you proceed despite the warnings.
 
 This is of course on our radar, and we'll hopefully have certificates integrated with builds on both platforms soon.
 
