@@ -1,0 +1,43 @@
+.tabs {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+
+    .tabs-header {
+        display: flex;
+        flex-direction: row;
+        flex-shrink: 0;
+        cursor: default;
+
+        .tab {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-grow: 1;
+            padding: 12px 0;
+            border-bottom: 2px solid $color-divider;
+
+            .icon {
+                color: rgba(255, 255, 255, .33);
+            }
+
+            &.active {
+                border-bottom: 2px solid $color-accent;
+
+                .icon {
+                    color: #fff;
+                }
+            }
+
+            &:hover {
+                background-color: rgba(255, 255, 255, .1);
+            }
+        }
+    }
+
+    .tab-content {
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+    }
+}

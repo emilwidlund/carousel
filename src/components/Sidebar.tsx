@@ -5,8 +5,10 @@ import {inject, observer} from 'mobx-react';
 import {remote, ipcRenderer} from 'electron';
 const shell = remote.shell;
 
+import Tabs from './Tabs';
 import Icon from './Icon';
 import Button from './Button';
+import snippets from '../snippets';
 
 import {
     ISidebarProps, 
@@ -124,7 +126,7 @@ class ProjectFileItem extends React.Component<IProjectFileItemProps> {
         return (
             <div 
                 className={classnames([
-                    'project-file-item', 
+                    'sidebar-interactive-item', 
                     this.props.selected ? 'active' : null
                 ])}
                 onClick={this.handleClick.bind(this)}
@@ -142,11 +144,167 @@ class ProjectFileItem extends React.Component<IProjectFileItemProps> {
     }
 }
 
-@inject('ProjectStore', 'EditorStore', 'PopupStore')
+
+
+@inject('ProjectStore', 'EditorStore')
+@observer
+class ProjectPanelHeader extends React.Component<any> {
+    render() {
+        return (
+            <div className="project-panel-header">
+                <h2>{this.props.ProjectStore.projectName}</h2>
+                <div className="project-actions">
+                    <Icon
+                        name="folder"
+                        size={20}
+                        onClick={() => {
+                            shell.openItem(this.props.ProjectStore.projectTempPath);
+                        }}
+                    />
+                    <Icon
+                        name="tab"
+                        size={20}
+                        onClick={() => {
+                            ipcRenderer.send('start-preview', this.props.ProjectStore.projectTempPath);
+                        }}
+                    />
+                    <Icon
+                        name="chrome_reader_mode"
+                        size={20}
+                        onClick={() => {
+                            shell.openExternal('https://classic.framer.com/docs');
+                        }}
+                    />
+                </div>
+            </div>
+        );
+    }
+}
+
+
+
+@inject('ProjectStore', 'EditorStore')
+@observer
+class ProjectPanelNavigator extends React.Component<any> {
+    render() {
+        return (
+            <div className="project-panel-navigator">
+                <div className="main">
+                    <ProjectFileItem 
+                        file={this.props.ProjectStore.mainFile} 
+                        selected={this.props.ProjectStore.mainFile === this.props.EditorStore.selectedFile}
+                    />
+                </div>
+                <div className="views">
+                    <ProjectFileCategoryHeader 
+                        title="Views"
+                        type={ProjectFileType.View}
+                    />
+                    {this.props.ProjectStore.viewFiles.map((file: IProjectFile, index: number) => {
+                        return (
+                            <ProjectFileItem 
+                                key={index} 
+                                file={file} 
+                                selected={file === this.props.EditorStore.selectedFile}
+                            />
+                        );
+                    })}
+                </div>
+                <div className="components">
+                    <ProjectFileCategoryHeader 
+                        title="Components"
+                        type={ProjectFileType.Component}
+                    />
+                    {this.props.ProjectStore.componentFiles.map((file: IProjectFile, index: number) => {
+                        return (
+                            <ProjectFileItem 
+                                key={index} 
+                                file={file} 
+                                selected={file === this.props.EditorStore.selectedFile}
+                            />
+                        );
+                    })}
+                </div>
+                <div className="generic">
+                    <ProjectFileCategoryHeader 
+                        title="Generic"
+                        type={ProjectFileType.Generic}
+                    />
+                    {this.props.ProjectStore.genericFiles.map((file: IProjectFile, index: number) => {
+                        return (
+                            <ProjectFileItem
+                                key={index} 
+                                file={file}
+                                selected={file === this.props.EditorStore.selectedFile}
+                            />
+                        );
+                    })}
+                </div>
+            </div>
+        );
+    }
+}
+
+
+class ProjectPanel extends React.Component<any> {
+    render() {
+        return (
+            <div className="project-panel">
+                <ProjectPanelHeader />
+                <ProjectPanelNavigator />
+            </div>
+        );
+    }
+}
+
+
+
+@inject('ProjectStore', 'EditorStore')
+@observer
+class SnippetItem extends React.Component<any> {
+    handleClick() {
+        if (this.props.ProjectStore.fileFormat == 'js') {
+            this.props.EditorStore.pasteSnippet(this.props.snippet.jsSnippet());
+        } else if (this.props.ProjectStore.fileFormat == 'coffee') {
+            this.props.EditorStore.pasteSnippet(this.props.snippet.csSnippet());
+        }
+    }
+
+    render() {
+        return (
+            <div 
+                className="sidebar-interactive-item"
+                onClick={this.handleClick.bind(this)}
+            >
+                <Icon name={this.props.snippet.icon} size={24} />
+                <span>{this.props.snippet.name}</span>
+            </div>
+        );
+    }
+}
+
+
+
+class SnippetPanel extends React.Component<any> {
+    render() {
+        return (
+            <div className="snippet-panel">
+                <h3>Snippets</h3>
+                <div className="snippet-items">
+                    {snippets.map((s, i) => {
+                        return <SnippetItem key={i} snippet={s} />;
+                    })}
+                </div>
+            </div>
+        );
+    }
+}
+
+
+@inject('ProjectStore')
 @observer
 export default class Sidebar extends React.Component<ISidebarProps> {
     componentDidMount() {
-
         ipcRenderer.on('save-project', () => {
             this.props.ProjectStore.saveProject(() => {
                 remote.getCurrentWindow().destroy();
@@ -157,85 +315,20 @@ export default class Sidebar extends React.Component<ISidebarProps> {
     render() {
         return (
             <div id="sidebar">
-                <div className="sidebar-header">
-                    <h2>{this.props.ProjectStore.projectName}</h2>
-                    <div className="project-actions">
-                        <Icon
-                            name="folder"
-                            size={20}
-                            onClick={() => {
-                                shell.openItem(this.props.ProjectStore.projectTempPath);
-                            }}
-                        />
-                        <Icon
-                            name="tab"
-                            size={20}
-                            onClick={() => {
-                                ipcRenderer.send('start-preview', this.props.ProjectStore.projectTempPath);
-                            }}
-                        />
-                        <Icon
-                            name="chrome_reader_mode"
-                            size={20}
-                            onClick={() => {
-                                shell.openExternal('https://classic.framer.com/docs');
-                            }}
-                        />
-                    </div>
-                </div>
-                <div className="sidebar-navigator">
-                    <div className="main">
-                        <ProjectFileItem 
-                            file={this.props.ProjectStore.mainFile} 
-                            selected={this.props.ProjectStore.mainFile === this.props.EditorStore.selectedFile}
-                        />
-                    </div>
-                    <div className="views">
-                        <ProjectFileCategoryHeader 
-                            title="Views"
-                            type={ProjectFileType.View}
-                        />
-                        {this.props.ProjectStore.viewFiles.map((file: IProjectFile, index: number) => {
-                            return (
-                                <ProjectFileItem 
-                                    key={index} 
-                                    file={file} 
-                                    selected={file === this.props.EditorStore.selectedFile}
-                                />
-                            );
-                        })}
-                    </div>
-                    <div className="components">
-                        <ProjectFileCategoryHeader 
-                            title="Components"
-                            type={ProjectFileType.Component}
-                        />
-                        {this.props.ProjectStore.componentFiles.map((file: IProjectFile, index: number) => {
-                            return (
-                                <ProjectFileItem 
-                                    key={index} 
-                                    file={file} 
-                                    selected={file === this.props.EditorStore.selectedFile}
-                                />
-                            );
-                        })}
-                    </div>
-                    <div className="generic">
-                        <ProjectFileCategoryHeader 
-                            title="Generic"
-                            type={ProjectFileType.Generic}
-                        />
-                        {this.props.ProjectStore.genericFiles.map((file: IProjectFile, index: number) => {
-                            return (
-                                <ProjectFileItem
-                                    key={index} 
-                                    file={file}
-                                    selected={file === this.props.EditorStore.selectedFile}
-                                />
-                            );
-                        })}
-                    </div>
-                </div>
+                <Tabs 
+                    tabs={[
+                        {
+                            title: 'Project',
+                            iconName: 'style',
+                            content: <ProjectPanel />
+                        },
+                        {
+                            title: 'Snippets',
+                            iconName: 'short_text',
+                            content: <SnippetPanel />
+                        }
+                    ]}
+                />
             </div>
         );
     }

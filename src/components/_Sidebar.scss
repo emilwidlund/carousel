@@ -11,7 +11,7 @@ $sidebar-padding-horizontal: 20px;
     border-right: 1px solid $color-divider;
     user-select: none;
 
-    .sidebar-header {
+    .project-panel-header {
         padding: 40px $sidebar-padding-horizontal;
 
         h2 {
@@ -37,7 +37,7 @@ $sidebar-padding-horizontal: 20px;
         }
     }
 
-    .sidebar-navigator {
+    .project-panel-navigator {
         display: flex;
         flex-direction: column;
         flex-grow: 1;
@@ -57,36 +57,55 @@ $sidebar-padding-horizontal: 20px;
                 }
             }
         }
+    }
 
-        .project-file-item {
+    .snippet-panel {
+        padding: 10px 0 0;
+        
+        h3 {
+            padding: 0 $sidebar-padding-horizontal;
+        }
+
+        .snippet-items {
             display: flex;
-            align-items: center;
-            padding: 10px $sidebar-padding-horizontal;
+            flex-direction: column;
 
-            span {
-                margin-left: 15px;
-            }
-
-            .icon {
-                color: $color-accent;
-            }
-
-            &.active {
-                color: #fff;
-                background-color: $color-accent;
-
-                .icon {
+            .sidebar-interactive-item {
+                span {
                     color: #fff;
                 }
+            }
+        }
+    }
 
-                &:hover {
-                    background-color: $color-accent;
-                }
+    .sidebar-interactive-item {
+        display: flex;
+        align-items: center;
+        padding: 10px $sidebar-padding-horizontal;
+
+        span {
+            margin-left: 15px;
+        }
+
+        .icon {
+            color: $color-accent;
+        }
+
+        &.active {
+            color: #fff;
+            background-color: $color-accent;
+
+            .icon {
+                color: #fff;
             }
 
             &:hover {
-                background-color: rgba(255, 255, 255, .05);
+                background-color: $color-accent;
             }
+        }
+
+        &:hover {
+            background-color: rgba(255, 255, 255, .05);
         }
     }
 }
