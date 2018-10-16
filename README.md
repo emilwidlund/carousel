@@ -1,6 +1,8 @@
 # Carousel 
 [![Build Status](https://travis-ci.org/emilwidlund/carousel.svg?branch=master)](https://travis-ci.org/emilwidlund/carousel)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/emilwidlund/carousel.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/emilwidlund/carousel/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/emilwidlund/carousel.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/emilwidlund/carousel/context:javascript)
 
 Carousel is a prototyping tool powered by [Framer Library](https://github.com/koenbok/Framer). It aims to provide a simple way to build large-scale prototypes with multiple files on both Mac and Windows. This is the first application that runs Framer on the Windows platform.
 
