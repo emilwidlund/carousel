@@ -63,7 +63,7 @@ export class ProjectStore {
         if (!projectPath.endsWith('.crsl')) return;
 
         this.projectPath = projectPath;
-        this.projectName = projectPath.substring((projectPath.lastIndexOf('\\') || projectPath.lastIndexOf('/')) + 1, projectPath.lastIndexOf('.crsl'));
+        this.projectName = path.parse(projectPath).name;
 
         temp.mkdir(`carousel-${this.projectName}`, (err: Error, dirPath: string) => {
             fs.createReadStream(projectPath)
