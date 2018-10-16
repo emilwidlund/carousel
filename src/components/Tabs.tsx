@@ -16,7 +16,7 @@ class Tab extends React.Component<any> {
                 onClick={() => this.props.selectTab(this.props.index)}
             >
                 <Icon
-                    name={this.props.tab.iconName}
+                    name={this.props.tab.icon}
                 />
             </div>
         );
@@ -70,7 +70,6 @@ export default class Tabs extends React.Component<any> {
                 <TabContent
                     title={this.props.tabs[this.state.selectedIndex].title}
                     content={this.props.tabs[this.state.selectedIndex].content}
-                    action={this.props.tabs[this.state.selectedIndex].action}
                 />
             </div>
         );

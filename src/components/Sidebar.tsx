@@ -319,12 +319,12 @@ export default class Sidebar extends React.Component<ISidebarProps> {
                     tabs={[
                         {
                             title: 'Project',
-                            iconName: 'style',
+                            icon: 'style',
                             content: <ProjectPanel />
                         },
                         {
                             title: 'Snippets',
-                            iconName: 'short_text',
+                            icon: 'short_text',
                             content: <SnippetPanel />
                         }
                     ]}
