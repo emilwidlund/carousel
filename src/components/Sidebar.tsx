@@ -174,6 +174,13 @@ export default class Sidebar extends React.Component<ISidebarProps> {
                                 ipcRenderer.send('start-preview', this.props.ProjectStore.projectTempPath);
                             }}
                         />
+                        <Icon
+                            name="chrome_reader_mode"
+                            size={20}
+                            onClick={() => {
+                                shell.openExternal('https://classic.framer.com/docs');
+                            }}
+                        />
                     </div>
                 </div>
                 <div className="sidebar-navigator">
