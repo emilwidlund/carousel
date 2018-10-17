@@ -61,6 +61,13 @@ app.on('ready', () => {
 
     });
 
+    mainWindow.on('close', () => {
+        if (previewWindow) {
+            previewWindow.destroy();
+            trackEvent('Window', 'Inheritly Closed', 'Preview Window');
+        }
+    });
+
     mainWindow.on('closed', () => {
         mainWindow = null;
         trackEvent('Window', 'Closed', 'Main Window');
@@ -78,7 +85,7 @@ ipcMain.on('start-preview', (event, arg) => {
             title: 'Preview',
             width: 1360,
             height: 800,
-            parent: mainWindow,
+            alwaysOnTop: true,
             experimentalFeatures: true,
             autoHideMenuBar: true,
             icon: path.join(__dirname, 'dist/icons/png/64x64.png')
@@ -105,7 +112,6 @@ ipcMain.on('start-preview', (event, arg) => {
             projectServerRunning = false;
             server.close();
             trackEvent('Project Server', 'Closed', 'Main Window');
-            trackEvent('Window', 'Inheritly Closed', 'Preview Window');
         });
     });
 });
