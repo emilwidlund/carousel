@@ -186,6 +186,8 @@ export class ProjectStore {
             case ProjectFileType.Generic:
                 filePath = `generic/${fileName}.generic.`;
                 break;
+            default:
+                filePath = `generic/${fileName}.generic.`;
         }
 
         filePath += this.fileFormat;
