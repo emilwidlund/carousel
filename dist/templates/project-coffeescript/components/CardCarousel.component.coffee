@@ -1,5 +1,3 @@
-{FocusStore} = require '../modules/joystick'
-
 class exports.CardCarousel extends ScrollComponent
     constructor: (props={}) ->
         super(props)

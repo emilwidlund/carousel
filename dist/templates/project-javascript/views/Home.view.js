@@ -1,4 +1,3 @@
-import {View, Focusable, Grid} from '../modules/joystick';
 import CardCarousel from '../components/CardCarousel.component';
 
 const view = new View({

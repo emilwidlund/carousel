@@ -1,4 +1,3 @@
-{View, Focusable, Grid} = require '../modules/joystick'
 {CardCarousel} = require '../components/CardCarousel.component'
 
 view = new View

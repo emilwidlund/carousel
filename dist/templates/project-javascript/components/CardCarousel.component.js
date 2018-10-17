@@ -1,5 +1,3 @@
-import {FocusStore} from '../modules/joystick.coffee';
-
 export default class CardCarousel extends ScrollComponent {
     constructor(props={}) {
         super(props);
