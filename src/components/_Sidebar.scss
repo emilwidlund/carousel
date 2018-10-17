@@ -6,9 +6,9 @@ $sidebar-padding-horizontal: 20px;
     flex-grow: 0;
     flex-shrink: 0;
     overflow-y: auto;
-    width: 300px;
+    width: 380px;
     background-color: $color-bg-sidebar;
-    // border-right: 1px solid $color-divider;
+    border-right: 1px solid $color-divider;
     user-select: none;
 
     .project-panel-navigator {
@@ -18,7 +18,7 @@ $sidebar-padding-horizontal: 20px;
         padding: 10px 0 0;
         
         h3 {
-            padding: 10px $sidebar-padding-horizontal;
+            padding: 5px $sidebar-padding-horizontal;
         }
 
         .views, .components, .images, .generic {
@@ -42,7 +42,7 @@ $sidebar-padding-horizontal: 20px;
         padding: 10px 0 0;
         
         h3 {
-            padding: 10px $sidebar-padding-horizontal;
+            padding: 5px $sidebar-padding-horizontal;
         }
 
         .snippet-items {

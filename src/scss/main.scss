@@ -21,16 +21,17 @@ body {
         .app-header {
             display: flex;
             align-items: center;
-            height: 70px;
+            height: 80px;
             padding: 0 20px;
             background-color: #000;
             user-select: none;
+            border-bottom: 1px solid $color-divider;
 
             .app-project { 
                 display: flex;
                 flex-direction: row;
                 align-items: center;
-                width: 280px;
+                width: 360px;
 
                 img {
                     height: 25px;
