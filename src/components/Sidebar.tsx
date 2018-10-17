@@ -119,6 +119,9 @@ class ProjectFileItem extends React.Component<IProjectFileItemProps> {
             case ProjectFileType.Component:
                 iconName = 'bubble_chart';
                 break;
+            case ProjectFileType.Image:
+                iconName = 'image';
+                break;
             default:
                 iconName = 'description';
         }
@@ -134,7 +137,7 @@ class ProjectFileItem extends React.Component<IProjectFileItemProps> {
                 <Icon name={iconName} size={24} />
                 <span>
                     {
-                        this.props.file.type === ProjectFileType.Generic ? 
+                        this.props.file.type === ProjectFileType.Generic || this.props.file.type === ProjectFileType.Image ? 
                         this.props.file.name : 
                         this.props.file.shortName
                     }
@@ -148,47 +151,11 @@ class ProjectFileItem extends React.Component<IProjectFileItemProps> {
 
 @inject('ProjectStore', 'EditorStore')
 @observer
-class ProjectPanelHeader extends React.Component<any> {
-    render() {
-        return (
-            <div className="project-panel-header">
-                <h2>{this.props.ProjectStore.projectName}</h2>
-                <div className="project-actions">
-                    <Icon
-                        name="folder"
-                        size={20}
-                        onClick={() => {
-                            shell.openItem(this.props.ProjectStore.projectTempPath);
-                        }}
-                    />
-                    <Icon
-                        name="tab"
-                        size={20}
-                        onClick={() => {
-                            ipcRenderer.send('start-preview', this.props.ProjectStore.projectTempPath);
-                        }}
-                    />
-                    <Icon
-                        name="chrome_reader_mode"
-                        size={20}
-                        onClick={() => {
-                            shell.openExternal('https://classic.framer.com/docs');
-                        }}
-                    />
-                </div>
-            </div>
-        );
-    }
-}
-
-
-
-@inject('ProjectStore', 'EditorStore')
-@observer
 class ProjectPanelNavigator extends React.Component<any> {
     render() {
         return (
             <div className="project-panel-navigator">
+                <h3>Project Navigator</h3>
                 <div className="main">
                     <ProjectFileItem 
                         file={this.props.ProjectStore.mainFile} 
@@ -225,6 +192,21 @@ class ProjectPanelNavigator extends React.Component<any> {
                         );
                     })}
                 </div>
+                <div className="images">
+                    <ProjectFileCategoryHeader 
+                        title="Images"
+                        type={ProjectFileType.Image}
+                    />
+                    {this.props.ProjectStore.imageFiles.map((file: IProjectFile, index: number) => {
+                        return (
+                            <ProjectFileItem 
+                                key={index} 
+                                file={file} 
+                                selected={file === this.props.EditorStore.selectedFile}
+                            />
+                        );
+                    })}
+                </div>
                 <div className="generic">
                     <ProjectFileCategoryHeader 
                         title="Generic"
@@ -250,7 +232,6 @@ class ProjectPanel extends React.Component<any> {
     render() {
         return (
             <div className="project-panel">
-                <ProjectPanelHeader />
                 <ProjectPanelNavigator />
             </div>
         );

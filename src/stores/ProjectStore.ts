@@ -71,18 +71,6 @@ export class ProjectStore {
                 .on('close', () => {
 
                     this.traverseFiles(dirPath, (files: IProjectFile[]) => {
-                        files.map((file: any, index: number) => {
-
-                            if (file.name.includes('Main.js') || file.name.includes('Main.coffee')) {
-                                file.type = ProjectFileType.Main;
-                            } else if (file.name.includes('.view.js') || file.name.includes('.view.coffee')) {
-                                file.type = ProjectFileType.View;
-                            } else if (file.name.includes('.component.js') || file.name.includes('.component.coffee')) {
-                                file.type = ProjectFileType.Component;
-                            }
-
-                        });
-
 
                         this.buildModels(files);
 
@@ -112,16 +100,34 @@ export class ProjectStore {
 
         walker.on('file', (root: string, fileStats: any, next: Function) => {
 
-            const projectFile: IProjectFile = {
-                name: fileStats.name,
-                shortName: fileStats.name.substring(0, fileStats.name.indexOf('.')),
-                path: path.resolve(root, fileStats.name),
-                model: null,
-                selected: false,
-                type: ProjectFileType.Generic
+            let type;
+
+            if (fileStats.name.includes('Main.js') || fileStats.name.includes('Main.coffee')) {
+                type = ProjectFileType.Main;
+            } else if (fileStats.name.includes('.view.js') || fileStats.name.includes('.view.coffee')) {
+                type = ProjectFileType.View;
+            } else if (fileStats.name.includes('.component.js') || fileStats.name.includes('.component.coffee')) {
+                type = ProjectFileType.Component;
+            } else if (fileStats.name.includes('.generic.js') || fileStats.name.includes('.generic.coffee')) {
+                type = ProjectFileType.Generic;
+            } else if (fileStats.name.endsWith('.jpg') || fileStats.name.endsWith('.png') || fileStats.name.endsWith('.gif')) {
+                type = ProjectFileType.Image;
+            } else if (fileStats.name.endsWith('.JPG') || fileStats.name.endsWith('.PNG') || fileStats.name.endsWith('.GIF')) {
+                type = ProjectFileType.Image;
             }
 
-            files.push(projectFile);
+            if (type != null) {
+                const projectFile: IProjectFile = {
+                    name: fileStats.name,
+                    shortName: fileStats.name.substring(0, fileStats.name.indexOf('.')),
+                    path: path.resolve(root, fileStats.name),
+                    model: null,
+                    selected: false,
+                    type: type
+                }
+    
+                files.push(projectFile);
+            }
 
             next();
         });
@@ -240,6 +246,10 @@ export class ProjectStore {
 
     get componentFiles() {
         return this.projectFiles.filter(f => f.type === ProjectFileType.Component);
+    }
+
+    get imageFiles() {
+        return this.projectFiles.filter(f => f.type === ProjectFileType.Image);
     }
 
     get genericFiles() {

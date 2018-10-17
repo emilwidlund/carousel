@@ -19,6 +19,7 @@ export declare class ProjectStore {
     readonly mainFile: IProjectFile;
     readonly viewFiles: IProjectFile[];
     readonly componentFiles: IProjectFile[];
+    readonly imageFiles: IProjectFile[];
     readonly genericFiles: IProjectFile[];
 }
 declare const projectStore: ProjectStore;

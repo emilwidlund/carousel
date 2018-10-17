@@ -11,7 +11,8 @@ export declare enum ProjectFileType {
     Main = 0,
     View = 1,
     Component = 2,
-    Generic = 3
+    Image = 3,
+    Generic = 4
 }
 export interface IProjectFile {
     name: string;

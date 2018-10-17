@@ -8,41 +8,20 @@ $sidebar-padding-horizontal: 20px;
     overflow-y: auto;
     width: 300px;
     background-color: $color-bg-sidebar;
-    border-right: 1px solid $color-divider;
+    // border-right: 1px solid $color-divider;
     user-select: none;
-
-    .project-panel-header {
-        padding: 40px $sidebar-padding-horizontal;
-
-        h2 {
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            width: 100%;
-            margin-top: 0;
-        }
-
-        .project-actions {
-            display: flex;
-            flex-direction: row;
-            margin-top: 10px;
-
-            > .icon {
-                margin-left: 20px;
-
-                &:first-child {
-                    margin-left: 0;
-                }
-            }
-        }
-    }
 
     .project-panel-navigator {
         display: flex;
         flex-direction: column;
         flex-grow: 1;
+        padding: 10px 0 0;
+        
+        h3 {
+            padding: 10px $sidebar-padding-horizontal;
+        }
 
-        .views, .components, .generic {
+        .views, .components, .images, .generic {
             padding: 10px 0;
 
             .file-category-header {
@@ -63,7 +42,7 @@ $sidebar-padding-horizontal: 20px;
         padding: 10px 0 0;
         
         h3 {
-            padding: 0 $sidebar-padding-horizontal;
+            padding: 10px $sidebar-padding-horizontal;
         }
 
         .snippet-items {

@@ -18,6 +18,7 @@ export enum ProjectFileType {
     Main,
     View,
     Component,
+    Image,
     Generic
 }
 
