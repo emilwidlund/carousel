@@ -175,19 +175,24 @@ export class ProjectStore {
 
     createNewFile(fileType: ProjectFileType, fileName: string, cb?: Function) {
         let filePath: string;
+        let type: string;
 
         switch(fileType) {
             case ProjectFileType.View:
                 filePath = `views/${fileName}.view.`;
+                type = 'view';
                 break;
             case ProjectFileType.Component:
                 filePath = `components/${fileName}.component.`;
+                type = 'component';
                 break;
             case ProjectFileType.Generic:
                 filePath = `generic/${fileName}.generic.`;
+                type = 'generic';
                 break;
             default:
                 filePath = `generic/${fileName}.generic.`;
+                type = 'generic';
         }
 
         filePath += this.fileFormat;
@@ -196,7 +201,7 @@ export class ProjectStore {
             if (err) return console.error(err);
 
             const file: IProjectFile = {
-                name: fileName + '.' + this.fileFormat,
+                name: fileName + '.' + type + '.' + this.fileFormat,
                 shortName: fileName,
                 path: path.resolve(this.projectTempPath, filePath),
                 model: null,
