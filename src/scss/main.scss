@@ -59,9 +59,14 @@ body {
                     padding: 0 20px;
                     color: #888;
 
+                    .icon {
+                        font-size: 14px;
+                    }
+
                     .label {
                         margin-left: 10px;
                         padding-top: 5px;
+                        font-size: $font-size-xs;
                     }
 
                     &:hover {
