@@ -2,6 +2,7 @@ import {observable} from 'mobx';
 import * as monaco from 'monaco-editor';
 
 import {remote, ipcRenderer} from 'electron';
+const trackEvent = remote.getGlobal('trackEvent');
 const fs = remote.require('fs');
 const walk = remote.require('walk');
 const path = remote.require('path');
@@ -47,6 +48,7 @@ export class ProjectStore {
 
         output.on('close', () => {
             console.log('Project Created!');
+            trackEvent('Project', 'Created', projectType);
             if (cb) cb();
             this.initializeProject(projectPath);
         });
@@ -80,6 +82,7 @@ export class ProjectStore {
                         ipcRenderer.send('start-preview', this.projectTempPath);
 
                         this.projectInitialized = true;
+                        trackEvent('Project', 'Initialized', this.fileFormat);
 
                         this.addToRecentProjects({
                             path: this.projectPath,
@@ -152,6 +155,7 @@ export class ProjectStore {
             if (err) return console.error(err);
 
             console.log('File Saved!');
+            trackEvent('Project File', 'Saved', file.path);
 
             if (cb) cb();
         });
@@ -164,6 +168,7 @@ export class ProjectStore {
 
             output.on('close', () => {
                 console.log('Project Saved!');
+                trackEvent('Project', 'Saved', this.fileFormat);
                 if (cb) cb();
             });
 
@@ -216,6 +221,8 @@ export class ProjectStore {
             }
 
             this.projectFiles.push(file);
+
+            trackEvent('Project File', 'Created', file.path);
 
             if (cb) cb(path.resolve(this.projectTempPath, filePath));
         });

@@ -6,6 +6,7 @@ const dialog = remote.dialog;
 const shell = remote.shell;
 const os = remote.require('os');
 const path = remote.require('path');
+const trackEvent = remote.getGlobal('trackEvent');
 
 import Button from './Button';
 import Icon from './Icon';
@@ -84,13 +85,17 @@ class NewProjectPopup extends React.Component<any> {
                         onClick={() => {
                             this.props.ProjectStore.createProject(this.state.projectType, this.state.filename, () => {
                                 this.props.PopupStore.disposePopup();
+                                trackEvent('Popup', 'Dispose', 'New Project');
                             });
                         }}
                     />
                     <Button
                         secondary={true}
                         text="Cancel"
-                        onClick={() => this.props.PopupStore.disposePopup()}
+                        onClick={() => {
+                            this.props.PopupStore.disposePopup();
+                            trackEvent('Popup', 'Cancel', 'New Project');
+                        }}
                     />
                 </div>
             </div>
@@ -132,6 +137,7 @@ export default class Welcome extends React.Component<any> {
     
     handleNewProject() {
         this.props.PopupStore.displayPopup(<NewProjectPopup />);
+        trackEvent('Popup', 'Display', 'New Project');
     }
 
     handleOpenProject() {
@@ -150,6 +156,7 @@ export default class Welcome extends React.Component<any> {
 
     openLink(url: string) {
         shell.openExternal(url);
+        trackEvent('Outbound Link', 'Click', url);
     }
 
     render() {
