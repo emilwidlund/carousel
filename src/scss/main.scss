@@ -6,7 +6,7 @@
 body {
     display: flex;
     margin: 0;
-    font-family: 'Maison Neue', sans-serif;
+    font-family: 'Roboto', sans-serif;
     font-size: $font-size-s;
     color: $color-text;
     height: 100%;
@@ -42,7 +42,6 @@ body {
                     padding: 5px 0 0 20px;
                     border-left: 1px solid rgba(255, 255, 255, .2);
                     font-size: $font-size-m;
-                    font-weight: 300;
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
