@@ -53,6 +53,47 @@ export default [
                 `\t\tprint 'Right'`
             ].join('\n');
         }
+    },
+
+    {
+        name: 'Focusable',
+        icon: 'view_carousel',
+        jsSnippet: () => {
+            return [
+                `new Focusable({`,
+                `\tparent: null, // Insert parent`,
+                `\twidth: Grid.getWidth(5),`,
+                `\theight: Grid.getHeight(35),`,
+                `\tbackgroundColor: 'rgba(255, 255, 255, .2)',`,
+                `\tfocusProperties: {`,
+                `\t\tscale: 1.1,`,
+                `\t\tbackgroundColor: '#fff',`,
+                `\t\tanimationOptions: {`,
+                `\t\t\ttime: .2`,
+                `\t\t}`,
+                `\t},`,
+                `\tanimationOptions: {`,
+                `\t\ttime: .2`,
+                `\t}`,
+                `});`
+            ].join('\n');
+        },
+        csSnippet: () => {
+            return [
+                `new Focusable`,
+                `\tparent: null # Insert parent`,
+                `\twidth: Grid.getWidth(5)`,
+                `\theight: Grid.getHeight(35)`,
+                `\tbackgroundColor: 'rgba(255, 255, 255, .2)'`,
+                `\tfocusProperties:`,
+                `\t\tscale: 1.1`,
+                `\t\tbackgroundColor: '#fff'`,
+                `\t\tanimationOptions:`,
+                `\t\t\ttime: .2`,
+                `\tanimationOptions:`,
+                `\t\ttime: .2`
+            ].join('\n');
+        }
     }
 ]
 
