@@ -18,12 +18,12 @@ The View class extends the Layer class, which means that all applicable properti
 All regular Layer-properties are applicable on Views.
 - safezone: `Layer` - Returns the safezone-layer that covers 90% of the screen. A safezone is widely used in TV-applications to prevent clipping of content. You should usually add children to this properties. For example: `parent: myView.safezone`.
 - background?: `object` - An object containing some properties on what the background should be. Important to use this instead of setting the backgroundColor/image on the View-instance.
--- image?: `string` - Path to image to use as background.
--- backgroundColor?: `string` - Color to use as background.
--- blur?: `number` - Useful if you want to blur the specified image.
+    - image?: `string` - Path to image to use as background.
+    - backgroundColor?: `string` - Color to use as background.
+    - blur?: `number` - Useful if you want to blur the specified image.
 - actions?: `object[]` - An array of objects defining what should happen when a key-event occurs. Used to trigger functions when a pressing a button on a Gamepad or a keyboard.
--- keyCode: `number` - The key-code that should trigger the action. Can be a Keyboard-keycode or Gamepad-keycode.
--- function: `function` - The function to execute when desired keycode is pressed.
+    - keyCode: `number` - The key-code that should trigger the action. Can be a Keyboard-keycode or Gamepad-keycode.
+    - function: `function` - The function to execute when desired keycode is pressed.
 
 
 
@@ -37,8 +37,8 @@ All regular Layer-properties are applicable on Focusables.
 - focusProperties: `object` - An object containing properties to use when the Focusable is focused. This is pretty much just a state. This can hold animationOptions if you want to define the animation going from the default state to the focused state.
 - animationOptions?: `object` - An object that defines the animation options when going from the focused state to the default state.
 - actions?: `object[]` - An array of objects defining what should happen when a key-event occurs. Used to trigger functions when a pressing a button on a Gamepad or a keyboard.
--- keyCode: `number` - The key-code that should trigger the action. Can be a Keyboard-keycode or Gamepad-keycode.
--- function: `function` - The function to execute when desired keycode is pressed.
+    - keyCode: `number` - The key-code that should trigger the action. Can be a Keyboard-keycode or Gamepad-keycode.
+    - function: `function` - The function to execute when desired keycode is pressed.
 
 ### Tips
 - If a focusable has opacity set to 0 or has visible set to false, that Focusable won't be navigatable. This means that it is handy to set one of these properties if you need to temporarily disable the navigation to a Focusable.
