@@ -8,9 +8,6 @@ Carousel is a prototyping tool powered by [Framer Library](https://github.com/ko
 
 New Carousel-projects comes pre-loaded with [Framer Joystick](https://blog.framer.com/introducing-framer-joystick-28359287bef0) and simple boilerplate code which makes it very easy to get up and running without having to setup anything.
 
-### Documentation
-You can read about the Joystick-API [here](https://github.com/emilwidlund/carousel/blob/master/docs/Joystick.md).
-
 ### Download
 You can find download-links for the latest release [here](https://github.com/emilwidlund/carousel/releases/latest). If you'd like to see all releases, you can find them [here](https://github.com/emilwidlund/carousel/releases).  
 Download the .dmg file for macOS or the .exe file for Windows.
@@ -19,6 +16,9 @@ Download the .dmg file for macOS or the .exe file for Windows.
 Code Signing Certificates has not yet been integrated with the builds for neither Windows or macOS. This means that both Windows and macOS (and probably a couple of anti-virus programs) will flag the Carousel installer as untrusted. Carousel will however run fine if you proceed despite the warnings.
 
 This is of course on our radar, and we'll hopefully have certificates integrated with builds on both platforms soon.
+
+### Documentation
+You can read about the Joystick-API [here](https://github.com/emilwidlund/carousel/blob/master/docs/Joystick.md).
 
 ### Issues & Contributing
 If you find an issue or a bug, please let us know by [submitting an issue](https://github.com/emilwidlund/carousel/issues). You could also [open a pull request](https://github.com/emilwidlund/carousel/pulls). If you have ideas of improvement and feature-requests, open an issue and add the "enhancement"-label.
