@@ -83,8 +83,8 @@ ipcMain.on('start-preview', (event, arg) => {
 
         previewWindow = new BrowserWindow({
             title: 'Preview',
-            width: 1360,
-            height: 800,
+            width: 640,
+            height: 360,
             alwaysOnTop: true,
             experimentalFeatures: true,
             autoHideMenuBar: true,
