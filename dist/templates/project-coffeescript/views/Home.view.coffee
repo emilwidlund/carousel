@@ -2,7 +2,6 @@
 
 view = new View
     size: Screen.size
-    title: 'Home'
     background:
         backgroundColor: '#000'
 

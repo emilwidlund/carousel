@@ -2,7 +2,6 @@ import CardCarousel from '../components/CardCarousel.component';
 
 const view = new View({
     size: Screen.size,
-    title: 'Home',
     background: {
         backgroundColor: '#000'
     }

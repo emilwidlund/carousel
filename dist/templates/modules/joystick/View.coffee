@@ -14,4 +14,3 @@ class exports.View extends Layer
 
 		@actions = properties.actions || []
 		@background = properties.background || {}
-		@title = properties.title || ''
