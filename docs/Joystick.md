@@ -6,7 +6,6 @@
 - [Focusable](#focusable)
 - [Grid](#grid)
 
-<a name="app"></a>
 ## App
 An app-instance is the brain of the prototype. It handles view-transitions, manages focusables and takes care of all views.
 The App class extends the FlowComponent class, which means that all applicable properties & methods for FlowComponents are supported on App-instances.
@@ -16,7 +15,6 @@ All regular FlowComponent-properties are applicable on an App.
 - view: `View` - The initial view to show.
 
 
-<a name="view"></a>
 ## View
 A View is exactly what you think it is. It is a layer that covers the screen and holds content.
 The View class extends the Layer class, which means that all applicable properties & methods for Layers are supported on View-instances.
@@ -33,7 +31,6 @@ All regular Layer-properties are applicable on Views.
     - function: `function` - The function to execute when desired keycode is pressed.
 
 
-<a name="focusable"></a>
 ## Focusable
 A Focusable is a navigatable entity. It has a default state and a focused state defined, which are cycled between depending on if it's focused or not.
 Focusables are navigatable with keyboard-arrows and gamepads.
@@ -51,7 +48,6 @@ All regular Layer-properties are applicable on Focusables.
 - If a focusable has opacity set to 0 or has visible set to false, that Focusable won't be navigatable. This means that it is handy to set one of these properties if you need to temporarily disable the navigation to a Focusable.
 
 
-<a name="grid"></a>
 ## Grid
 The Grid is used to achieve coherent and perfectly aligned prototypes. It primarly utilizes two methods that should be used whenever you want to define sizes & margins.
 
