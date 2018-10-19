@@ -51,7 +51,7 @@ The Grid contain 24 columns, 23 gutters and infinite vertical rows. Gutters & Ro
 ```
 new Layer
     width: Grid.getWidth(4) # Returns the width of 4 columns + 3 gutters
-    height: Grid.getHeight(15) # Returns 15 rows which will result in 150px
+    height: Grid.getHeight(15) # Returns the height of 15 rows
 ```
 
 ### Properties
