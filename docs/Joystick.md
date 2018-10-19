@@ -26,7 +26,6 @@ All regular Layer-properties are applicable on Views.
     - function: `function` - The function to execute when desired keycode is pressed.
 
 
-
 ## Focusable
 A Focusable is a navigatable entity. It has a default state and a focused state defined, which are cycled between depending on if it's focused or not.
 Focusables are navigatable with keyboard-arrows and gamepads.
@@ -42,3 +41,29 @@ All regular Layer-properties are applicable on Focusables.
 
 ### Tips
 - If a focusable has opacity set to 0 or has visible set to false, that Focusable won't be navigatable. This means that it is handy to set one of these properties if you need to temporarily disable the navigation to a Focusable.
+
+
+## Grid
+The Grid is used to achieve coherent and perfectly aligned prototypes. It primarly utilizes two methods that should be used whenever you want to define sizes & margins.
+
+The Grid contain 24 columns, 23 gutters and infinite vertical rows. Gutters & Rows are always 10px. Columns have a variable width, depending on how big the Screen is. When you want to define a size for an element, you can simply do like this:
+
+```
+new Layer
+    width: Grid.getWidth(4) # Returns the width of 4 columns + 3 gutters
+    height: Grid.getHeight(15) # Returns 15 rows which will result in 150px
+```
+
+### Properties
+All these properties are readonly
+- safezoneBounds: `object` - Returns width & height of the Grid safezone
+- dangerzoneBounds: `object` - Returns the width of the dangergap between the left screen edge and the horizontal safezone start point & height of the dangergap between the top screen edge and the vertical safezone start point.
+- columnCount: `number` - Returns the amount of columns in the Grid
+- columnGutterCount: `number` - Returns the amount of column gutters in the Grid
+- columnGutter: `number` - Returns the column gutter width
+- columnWidth: `number` - Returns the width of a single column
+- rowHeight: `number` - Returns the height of a row
+
+### Methods
+- getWidth(columnCount: number) - Returns the pixels of the amount of columns + (amount of columns - 1) gutters
+- getHeight(rowCount: number) - Returns the pixels of rowCount * 10px
