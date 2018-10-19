@@ -15,6 +15,7 @@ A View is exactly what you think it is. It is a layer that covers the screen and
 The View class extends the Layer class, which means that all applicable properties & methods for Layers are supported on View-instances.
 
 ### Properties
+All regular Layer-properties are applicable on Views.
 - safezone: `Layer` - Returns the safezone-layer that covers 90% of the screen. A safezone is widely used in TV-applications to prevent clipping of content. You should usually add children to this properties. For example: `parent: myView.safezone`.
 - background?: `object` - An object containing some properties on what the background should be. Important to use this instead of setting the backgroundColor/image on the View-instance.
 -- image?: `string` - Path to image to use as background.
