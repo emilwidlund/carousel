@@ -1,10 +1,10 @@
 # Joystick Documentation
 
 #### Table of Contents
-1. [App](#app)
-2. [View](#view)
-3. [Focusable](#focusable)
-4. [Grid](#grid)
+- [App](#app)
+- [View](#view)
+- [Focusable](#focusable)
+- [Grid](#grid)
 
 <a name="app"></a>
 ## App
