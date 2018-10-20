@@ -60,7 +60,7 @@ new Layer
 ```
 
 ### Properties
-All these properties are readonly
+All these properties are readonly.
 - safezoneBounds: `object` - Returns width & height of the Grid safezone
 - dangerzoneBounds: `object` - Returns the width of the dangergap between the left screen edge and the horizontal safezone start point & height of the dangergap between the top screen edge and the vertical safezone start point.
 - columnCount: `number` - Returns the amount of columns in the Grid
@@ -72,3 +72,33 @@ All these properties are readonly
 ### Methods
 - getWidth(columnCount: number) - Returns the pixels of the amount of columns + (amount of columns - 1) gutters
 - getHeight(rowCount: number) - Returns the pixels of rowCount * 10px
+
+
+## Gamepad
+The Gamepad instance emits gamepadevents whenever you trigger a button on your gamepad.
+The Gamepad is an EventEmitter under the hood. To handle gamepad events, simply do like this:
+
+```
+# If you want throttled events, uncomment the line below
+# Gamepad.throttle = true
+
+Gamepad.on 'gamepadevent', (e) ->
+    # Gamepad Right Stick Going Up
+    if e.keyCode == 41
+        print 'Up'
+
+    # Gamepad Right Stick Going Left
+    if e.keyCode == 42
+        print 'Left'
+
+    # Gamepad Right Stick Going Down
+    if e.keyCode == 43
+        print 'Down'
+
+    # Gamepad Right Stick Going Right
+    if e.keyCode == 44
+        print 'Right'
+```
+
+### Properties
+- throttle: `boolean` - By default, all gamepad events are emitted multiple times a second. Setting this value to true will limit the events to be emitted less frequently.
