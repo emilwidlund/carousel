@@ -5,6 +5,7 @@
 - [View](#view)
 - [Focusable](#focusable)
 - [Grid](#grid)
+- [Gamepad](#gamepad)
 
 ## App
 An app-instance is the brain of the prototype. It handles view-transitions, manages focusables and takes care of all views.
@@ -146,3 +147,33 @@ Gamepad.on 'gamepadevent', (e) ->
 
 ### Properties
 - throttle: `boolean` - By default, all gamepad events are emitted multiple times a second. Setting this value to true will limit the events to be emitted less frequently.
+
+
+## FocusStore
+The FocusStore holds the state of all focusables within the current view. It emits events when focusing occurs.
+The FocusStore is an EventEmitter under the hood.
+
+```
+FocusStore.on 'focusEvent', (focusEvent) ->
+    # The focusEvent contain the previously focused focusable and the new, current focused focusable
+```
+
+## ViewStore
+The ViewStore holds the state of all focusables within the current view. It emits events when view-transitions occurs.
+The ViewStore is an EventEmitter under the hood.
+
+```
+# Listen for transition events
+ViewStore.on 'transitionEvent', (transitionEvent) ->
+    # The transitionEvent contain the previous view, the current view and the transition that was used
+
+# Transition to a view using the goDeep transition
+ViewStore.transition(myView, Transitions.goIn)
+
+# Pop the history stack and go back to the previous screen
+ViewStore.goBack()
+```
+
+### Methods
+- transition(view: View, transition?: Transition) - Transitions to the specified view. Transition can be specified. You can use [these pre-defined transitions](https://github.com/emilwidlund/carousel/blob/master/dist/templates/modules/joystick/Transitions.coffee) or read more about them [here](https://medium.com/the-school-of-do/framer-cheat-sheet-flow-components-f7ca94632227#c7f7).
+- goBack() - Pops the history stack and goes back to the previous screen
