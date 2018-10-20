@@ -6,6 +6,8 @@
 - [Focusable](#focusable)
 - [Grid](#grid)
 - [Gamepad](#gamepad)
+- [FocusStore](#focusstore)
+- [ViewStore](#viewstore)
 
 ## App
 An app-instance is the brain of the prototype. It handles view-transitions, manages focusables and takes care of all views.
