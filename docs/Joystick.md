@@ -10,6 +10,11 @@
 An app-instance is the brain of the prototype. It handles view-transitions, manages focusables and takes care of all views.
 The App class extends the FlowComponent class, which means that all applicable properties & methods for FlowComponents are supported on App-instances.
 
+```
+app = new App
+    view: myView
+```
+
 ### Properties
 All regular FlowComponent-properties are applicable on an App.
 - view: `View` - The initial view to show.
@@ -18,6 +23,23 @@ All regular FlowComponent-properties are applicable on an App.
 ## View
 A View is exactly what you think it is. It is a layer that covers the screen and holds content.
 The View class extends the Layer class, which means that all applicable properties & methods for Layers are supported on View-instances.
+
+```
+myView = new View
+    background:
+        backgroundColor: '#f66'
+    actions: [
+        {
+            keyCode: 41
+            function: () ->
+                print 'Something happens when moving the right stick up on my Gamepad, on this view'
+        }
+    ]
+
+l = new Layer
+    parent: myView.safezone
+    backgroundColor: '#fff'
+```
 
 ### Properties
 All regular Layer-properties are applicable on Views.
@@ -35,6 +57,28 @@ All regular Layer-properties are applicable on Views.
 A Focusable is a navigatable entity. It has a default state and a focused state defined, which are cycled between depending on if it's focused or not.
 Focusables are navigatable with keyboard-arrows and gamepads.
 The Focusable class extends the Layer class, which means that all applicable properties & methods for Layers are supported on Focusable-instances.
+
+```
+foc = new Focusable
+    parent: myView.safezone
+    width: Grid.getWidth(4)
+    height: Grid.getHeight(45)
+    backgroundColor: 'rgba(255, 255, 255, .5)'
+    focusProperties:
+        scale: 1.1
+        backgroundColor: '#fff'
+        animationOptions:
+            time: .2
+    animationOptions:
+        time: .2
+    actions: [
+        {
+            keyCode: 41
+            function: () ->
+                print 'Something happens when moving the right stick up on my Gamepad, while focusing this focusable'
+        }
+    ]
+```
 
 ### Properties
 All regular Layer-properties are applicable on Focusables.
