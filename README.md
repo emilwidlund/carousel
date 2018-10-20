@@ -18,7 +18,8 @@ Code Signing Certificates has not yet been integrated with the builds for neithe
 This is of course on our radar, and we'll hopefully have certificates integrated with builds on both platforms soon.
 
 ### Documentation
-You can read about the Joystick-API [here](https://github.com/emilwidlund/carousel/blob/master/docs/Joystick.md).
+- [Joystick Documentation](https://github.com/emilwidlund/carousel/blob/master/docs/Joystick.md).
+- Joystick Guides - Coming Soon
 
 ### Issues & Contributing
 If you find an issue or a bug, please let us know by [submitting an issue](https://github.com/emilwidlund/carousel/issues). You could also [open a pull request](https://github.com/emilwidlund/carousel/pulls). If you have ideas of improvement and feature-requests, open an issue and add the "enhancement"-label.
