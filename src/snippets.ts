@@ -5,7 +5,7 @@ export default [
         jsSnippet: () => {
             return [
                 `// If you want throttled events, uncomment the line below`,
-                `// Gamepad.throttled = true;`,
+                `// Gamepad.throttle = true;`,
                 ``,
                 `Gamepad.on('gamepadevent', (e) => {`,
                 `\t// Gamepad Right Stick Going Up`,
@@ -33,7 +33,7 @@ export default [
         csSnippet: () => {
             return [
                 `# If you want throttled events, uncomment the line below`,
-                `# Gamepad.throttled = true`,
+                `# Gamepad.throttle = true`,
                 ``,
                 `Gamepad.on 'gamepadevent', (e) ->`,
                 `\t# Gamepad Right Stick Going Up`,
