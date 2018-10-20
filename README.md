@@ -18,7 +18,7 @@ Code Signing Certificates has not yet been integrated with the builds for neithe
 This is of course on our radar, and we'll hopefully have certificates integrated with builds on both platforms soon.
 
 ### Documentation
-- [Joystick Documentation](https://github.com/emilwidlund/carousel/blob/master/docs/Joystick.md).
+- [Joystick Documentation](https://github.com/emilwidlund/carousel/blob/master/docs/Joystick.md)
 - Joystick Guides - Coming Soon
 
 ### Issues & Contributing
