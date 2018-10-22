@@ -169,7 +169,7 @@ The ViewStore is an EventEmitter under the hood.
 ViewStore.on 'transitionEvent', (transitionEvent) ->
     # The transitionEvent contain the previous view, the current view and the transition that was used
 
-# Transition to a view using the goDeep transition
+# Transition to a view using the goIn transition
 ViewStore.transition(myView, Transitions.goIn)
 
 # Pop the history stack and go back to the previous screen
