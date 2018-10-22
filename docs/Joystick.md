@@ -46,7 +46,7 @@ l = new Layer
 
 ### Properties
 All regular Layer-properties are applicable on Views.
-- safezone: `Layer` - Returns the safezone-layer that covers 90% of the screen. A safezone is widely used in TV-applications to prevent clipping of content. You should usually add children to this properties. For example: `parent: myView.safezone`.
+- safezone: `Layer` - Returns the safezone-layer that covers 90% of the view. A safezone is widely used in TV-applications to prevent clipping of content. You should usually add children to this properties. For example: `parent: myView.safezone`.
 - background?: `object` - An object containing some properties on what the background should be. Important to use this instead of setting the backgroundColor/image on the View-instance.
     - image?: `string` - Path to image to use as background.
     - backgroundColor?: `string` - Color to use as background.
